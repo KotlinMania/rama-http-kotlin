@@ -29,8 +29,8 @@ public class Request(
     public companion object {
         public fun builder(): RequestBuilder = RequestBuilder()
 
-        public fun new(body: Body): Request {
-            return Request(
+        public fun new(body: Body): Request =
+            Request(
                 method = Method.GET,
                 uri = Uri.fromString("/"),
                 version = Version.HTTP_11,
@@ -38,7 +38,6 @@ public class Request(
                 extensions = Extensions(),
                 body = body,
             )
-        }
     }
 }
 
@@ -47,6 +46,7 @@ public class RequestBuilder {
     private var uri: Uri = Uri.fromString("/")
     private var version: Version = Version.HTTP_11
     private val headers: HeaderMap = HeaderMap()
+
     @PublishedApi
     internal val extensions: Extensions = Extensions()
 
@@ -90,8 +90,8 @@ public class RequestBuilder {
         return this
     }
 
-    public fun body(body: Body): Request {
-        return Request(
+    public fun body(body: Body): Request =
+        Request(
             method = method,
             uri = uri,
             version = version,
@@ -99,7 +99,6 @@ public class RequestBuilder {
             extensions = extensions,
             body = body,
         )
-    }
 
     public fun body(text: String): Request = body(Body.fromString(text))
 

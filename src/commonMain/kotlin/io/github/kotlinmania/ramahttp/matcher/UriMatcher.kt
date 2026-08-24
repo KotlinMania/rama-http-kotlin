@@ -13,7 +13,6 @@ public fun interface UriPredicate {
 public class UriMatcher private constructor(
     private val predicate: UriPredicate,
 ) : Matcher<Request> {
-
     public fun isMatch(uriStr: String): Boolean = predicate.matches(uriStr)
 
     override fun matches(ext: Extensions?, req: Request): Boolean {
@@ -30,20 +29,21 @@ public class UriMatcher private constructor(
         }
 
         public fun wildcard(pattern: String): UriMatcher {
-            val regexPattern = buildString {
-                append("^")
-                for (char in pattern) {
-                    when (char) {
-                        '*' -> append(".*")
-                        '?' -> append(".")
-                        '.', '\\', '+', '(', ')', '[', ']', '{', '}', '^', '$', '|' -> {
-                            append('\\').append(char)
+            val regexPattern =
+                buildString {
+                    append("^")
+                    for (char in pattern) {
+                        when (char) {
+                            '*' -> append(".*")
+                            '?' -> append(".")
+                            '.', '\\', '+', '(', ')', '[', ']', '{', '}', '^', '$', '|' -> {
+                                append('\\').append(char)
+                            }
+                            else -> append(char)
                         }
-                        else -> append(char)
                     }
+                    append("$")
                 }
-                append("$")
-            }
             val r = Regex(regexPattern, RegexOption.IGNORE_CASE)
             return UriMatcher { r.matches(it) }
         }

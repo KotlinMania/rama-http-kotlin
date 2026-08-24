@@ -2,7 +2,6 @@
 package io.github.kotlinmania.ramahttp.body
 
 import io.github.kotlinmania.ramahttp.types.Body
-import io.github.kotlinmania.ramahttp.types.HeaderMap
 import io.github.kotlinmania.ramahttp.types.HeaderName
 import io.github.kotlinmania.ramahttp.types.HeaderValue
 import io.github.kotlinmania.ramahttp.types.HttpError
@@ -30,12 +29,13 @@ public class ZipBomb(
     public fun withFileSize(fileSize: Long): ZipBomb =
         ZipBomb(filename = filename, depth = depth, fanout = fanout, fileSize = if (fileSize > 0) fileSize else DEFAULT_FILE_SIZE)
 
-    public fun generateResponseHeaders(): Map<HeaderName, HeaderValue> = mapOf(
-        HeaderName.fromString("Robots") to HeaderValue.fromString("none"),
-        HeaderName.fromString("X-Robots-Tag") to HeaderValue.fromString("noindex, nofollow"),
-        HeaderName.CONTENT_TYPE to HeaderValue.fromString("application/zip"),
-        HeaderName.CONTENT_DISPOSITION to HeaderValue.fromString("attachment; filename=$filename.zip"),
-    )
+    public fun generateResponseHeaders(): Map<HeaderName, HeaderValue> =
+        mapOf(
+            HeaderName.fromString("Robots") to HeaderValue.fromString("none"),
+            HeaderName.fromString("X-Robots-Tag") to HeaderValue.fromString("noindex, nofollow"),
+            HeaderName.CONTENT_TYPE to HeaderValue.fromString("application/zip"),
+            HeaderName.CONTENT_DISPOSITION to HeaderValue.fromString("attachment; filename=$filename.zip"),
+        )
 
     public fun generateBody(): Body {
         // Generates minimal valid zip header with declared uncompressed size
@@ -44,9 +44,11 @@ public class ZipBomb(
     }
 
     public fun generateResponse(): Response {
-        val res = Response.builder()
-            .status(StatusCode.OK)
-            .body(generateBody())
+        val res =
+            Response
+                .builder()
+                .status(StatusCode.OK)
+                .body(generateBody())
         for ((name, value) in generateResponseHeaders()) {
             res.headers.append(name, value)
         }

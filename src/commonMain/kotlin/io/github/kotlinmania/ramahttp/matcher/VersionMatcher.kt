@@ -12,18 +12,11 @@ import io.github.kotlinmania.ramahttp.types.Version
 public class VersionMatcher private constructor(
     public val bits: UShort,
 ) : Matcher<Request> {
+    public fun or(other: VersionMatcher): VersionMatcher = VersionMatcher((this.bits or other.bits))
 
-    public fun or(other: VersionMatcher): VersionMatcher {
-        return VersionMatcher((this.bits or other.bits))
-    }
+    public fun and(other: VersionMatcher): VersionMatcher = VersionMatcher((this.bits and other.bits))
 
-    public fun and(other: VersionMatcher): VersionMatcher {
-        return VersionMatcher((this.bits and other.bits))
-    }
-
-    public fun contains(other: VersionMatcher): Boolean {
-        return (this.bits and other.bits) == other.bits
-    }
+    public fun contains(other: VersionMatcher): Boolean = (this.bits and other.bits) == other.bits
 
     override fun matches(ext: Extensions?, req: Request): Boolean {
         val vm = fromVersion(req.version) ?: return false
@@ -47,14 +40,13 @@ public class VersionMatcher private constructor(
 
         public fun fromBits(bits: UShort): VersionMatcher = VersionMatcher(bits)
 
-        public fun fromVersion(version: Version): VersionMatcher? {
-            return when (version) {
+        public fun fromVersion(version: Version): VersionMatcher? =
+            when (version) {
                 Version.HTTP_09 -> HTTP_09
                 Version.HTTP_10 -> HTTP_10
                 Version.HTTP_11 -> HTTP_11
                 Version.HTTP_2 -> HTTP_2
                 Version.HTTP_3 -> HTTP_3
             }
-        }
     }
 }

@@ -9,7 +9,6 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class ZipBombTest {
-
     @Test
     fun testZipBombHeaders() {
         val bomb = ZipBomb(filename = "test_trap")

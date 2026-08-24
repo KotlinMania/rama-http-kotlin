@@ -3,7 +3,6 @@ package io.github.kotlinmania.ramahttp.layer
 
 import io.github.kotlinmania.ramahttp.core.HttpLayer
 import io.github.kotlinmania.ramahttp.core.HttpService
-import io.github.kotlinmania.ramahttp.types.Body
 import io.github.kotlinmania.ramahttp.types.HeaderName
 import io.github.kotlinmania.ramahttp.types.HeaderValue
 import io.github.kotlinmania.ramahttp.types.Request
@@ -27,10 +26,7 @@ public class SetRequestIdLayer(
     private val headerName: HeaderName = HeaderName.X_REQUEST_ID,
     private val makeRequestId: MakeRequestId,
 ) : HttpLayer {
-
-    override fun layer(inner: HttpService): HttpService {
-        return SetRequestId(inner, headerName, makeRequestId)
-    }
+    override fun layer(inner: HttpService): HttpService = SetRequestId(inner, headerName, makeRequestId)
 }
 
 internal class SetRequestId(
@@ -38,7 +34,6 @@ internal class SetRequestId(
     private val headerName: HeaderName = HeaderName.X_REQUEST_ID,
     private val makeRequestId: MakeRequestId,
 ) : HttpService {
-
     override suspend fun serve(req: Request): Response {
         val reqId = makeRequestId.makeRequestId(req)
         if (reqId != null) {
@@ -52,17 +47,13 @@ internal class SetRequestId(
 public class PropagateRequestIdLayer(
     private val headerName: HeaderName = HeaderName.X_REQUEST_ID,
 ) : HttpLayer {
-
-    override fun layer(inner: HttpService): HttpService {
-        return PropagateRequestId(inner, headerName)
-    }
+    override fun layer(inner: HttpService): HttpService = PropagateRequestId(inner, headerName)
 }
 
 internal class PropagateRequestId(
     private val inner: HttpService,
     private val headerName: HeaderName = HeaderName.X_REQUEST_ID,
 ) : HttpService {
-
     override suspend fun serve(req: Request): Response {
         val res = inner.serve(req)
         val reqId = req.headers.get(headerName) ?: req.extensions.get(RequestId::class)?.headerValue

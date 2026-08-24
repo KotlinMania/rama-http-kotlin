@@ -3,7 +3,6 @@ package io.github.kotlinmania.ramahttp.layer
 
 import io.github.kotlinmania.ramahttp.core.HttpLayer
 import io.github.kotlinmania.ramahttp.core.HttpService
-import io.github.kotlinmania.ramahttp.types.Body
 import io.github.kotlinmania.ramahttp.types.PathAndQuery
 import io.github.kotlinmania.ramahttp.types.Request
 import io.github.kotlinmania.ramahttp.types.Response
@@ -17,13 +16,11 @@ public enum class NormalizeMode {
 public class NormalizePathLayer(
     private val mode: NormalizeMode = NormalizeMode.TRIM,
 ) : HttpLayer {
-
-    override fun layer(inner: HttpService): HttpService {
-        return NormalizePath(inner, mode)
-    }
+    override fun layer(inner: HttpService): HttpService = NormalizePath(inner, mode)
 
     public companion object {
         public fun trimTrailingSlash(): NormalizePathLayer = NormalizePathLayer(NormalizeMode.TRIM)
+
         public fun appendTrailingSlash(): NormalizePathLayer = NormalizePathLayer(NormalizeMode.APPEND)
     }
 }
@@ -32,26 +29,26 @@ internal class NormalizePath(
     private val inner: HttpService,
     private val mode: NormalizeMode = NormalizeMode.TRIM,
 ) : HttpService {
-
     override suspend fun serve(req: Request): Response {
         val uri = req.uri
         val path = uri.path
-        val newPath = when (mode) {
-            NormalizeMode.TRIM -> {
-                if (path.length > 1 && path.endsWith('/')) {
-                    path.trimEnd('/')
-                } else {
-                    path
+        val newPath =
+            when (mode) {
+                NormalizeMode.TRIM -> {
+                    if (path.length > 1 && path.endsWith('/')) {
+                        path.trimEnd('/')
+                    } else {
+                        path
+                    }
+                }
+                NormalizeMode.APPEND -> {
+                    if (!path.endsWith('/')) {
+                        "$path/"
+                    } else {
+                        path
+                    }
                 }
             }
-            NormalizeMode.APPEND -> {
-                if (!path.endsWith('/')) {
-                    "$path/"
-                } else {
-                    path
-                }
-            }
-        }
 
         if (newPath != path) {
             val query = uri.query

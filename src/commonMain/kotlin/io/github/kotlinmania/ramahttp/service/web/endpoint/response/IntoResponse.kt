@@ -17,33 +17,47 @@ public fun interface IntoResponse {
 /**
  * HTML Response wrapper.
  */
-public data class Html(public val content: String) : IntoResponse {
-    override fun intoResponse(): Response = Response.builder()
-        .status(StatusCode.OK)
-        .header(HeaderName.CONTENT_TYPE, HeaderValue("text/html; charset=utf-8"))
-        .body(Body.fromString(content))
+public data class Html(
+    public val content: String,
+) : IntoResponse {
+    override fun intoResponse(): Response =
+        Response
+            .builder()
+            .status(StatusCode.OK)
+            .header(HeaderName.CONTENT_TYPE, HeaderValue("text/html; charset=utf-8"))
+            .body(Body.fromString(content))
 }
 
 /**
  * JSON Response wrapper.
  */
-public data class Json(public val jsonString: String) : IntoResponse {
-    override fun intoResponse(): Response = Response.builder()
-        .status(StatusCode.OK)
-        .header(HeaderName.CONTENT_TYPE, HeaderValue("application/json; charset=utf-8"))
-        .body(Body.fromString(jsonString))
+public data class Json(
+    public val jsonString: String,
+) : IntoResponse {
+    override fun intoResponse(): Response =
+        Response
+            .builder()
+            .status(StatusCode.OK)
+            .header(HeaderName.CONTENT_TYPE, HeaderValue("application/json; charset=utf-8"))
+            .body(Body.fromString(jsonString))
 }
 
 /**
  * Text Response wrapper.
  */
-public data class Text(public val text: String) : IntoResponse {
-    override fun intoResponse(): Response = Response.builder()
-        .status(StatusCode.OK)
-        .header(HeaderName.CONTENT_TYPE, HeaderValue("text/plain; charset=utf-8"))
-        .body(Body.fromString(text))
+public data class Text(
+    public val text: String,
+) : IntoResponse {
+    override fun intoResponse(): Response =
+        Response
+            .builder()
+            .status(StatusCode.OK)
+            .header(HeaderName.CONTENT_TYPE, HeaderValue("text/plain; charset=utf-8"))
+            .body(Body.fromString(text))
 }
 
-public fun StatusCode.intoResponse(): Response = Response.builder()
-    .status(this)
-    .body(Body.empty())
+public fun StatusCode.intoResponse(): Response =
+    Response
+        .builder()
+        .status(this)
+        .body(Body.empty())

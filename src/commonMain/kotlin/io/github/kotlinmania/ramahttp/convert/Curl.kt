@@ -1,7 +1,6 @@
 // port-lint: source convert/curl.rs
 package io.github.kotlinmania.ramahttp.convert
 
-import io.github.kotlinmania.ramahttp.types.Body
 import io.github.kotlinmania.ramahttp.types.HeaderName
 import io.github.kotlinmania.ramahttp.types.Method
 import io.github.kotlinmania.ramahttp.types.Request
@@ -34,7 +33,12 @@ public fun cmdStringForRequestParts(parts: RequestParts, payload: ByteArray? = n
             continue
         }
         for (value in parts.headers.getAll(header)) {
-            sb.append(" \\\n  -H '").append(header.asStr()).append(": ").append(value.toStr()).append("'")
+            sb
+                .append(" \\\n  -H '")
+                .append(header.asStr())
+                .append(": ")
+                .append(value.toStr())
+                .append("'")
         }
     }
 

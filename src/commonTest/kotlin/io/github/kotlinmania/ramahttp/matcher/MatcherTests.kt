@@ -7,7 +7,6 @@ import io.github.kotlinmania.ramahttp.types.HeaderName
 import io.github.kotlinmania.ramahttp.types.HeaderValue
 import io.github.kotlinmania.ramahttp.types.Method
 import io.github.kotlinmania.ramahttp.types.Request
-import io.github.kotlinmania.ramahttp.types.Version
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -15,7 +14,6 @@ import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 class MatcherTests {
-
     @Test
     fun testMethodMatcher() {
         val getOrPost = MethodMatcher.GET.or(MethodMatcher.POST)
@@ -43,9 +41,11 @@ class MatcherTests {
         val exists = HeaderMatcher.exists(HeaderName.AUTHORIZATION)
         val isJson = HeaderMatcher.`is`(HeaderName.CONTENT_TYPE, HeaderValue.fromString("application/json"))
 
-        val req = Request.builder()
-            .header(HeaderName.CONTENT_TYPE, HeaderValue.fromString("application/json"))
-            .body(Body.empty())
+        val req =
+            Request
+                .builder()
+                .header(HeaderName.CONTENT_TYPE, HeaderValue.fromString("application/json"))
+                .body(Body.empty())
 
         assertFalse(exists.matches(null, req))
         assertTrue(isJson.matches(null, req))
@@ -109,9 +109,24 @@ class MatcherTests {
     @Test
     fun testHttpMatcherComposite() {
         val matcher = HttpMatcher.methodGet().andPath("/api/v1/health")
-        val validReq = Request.builder().method(Method.GET).uri("/api/v1/health").body(Body.empty())
-        val invalidMethod = Request.builder().method(Method.POST).uri("/api/v1/health").body(Body.empty())
-        val invalidPath = Request.builder().method(Method.GET).uri("/api/v1/other").body(Body.empty())
+        val validReq =
+            Request
+                .builder()
+                .method(Method.GET)
+                .uri("/api/v1/health")
+                .body(Body.empty())
+        val invalidMethod =
+            Request
+                .builder()
+                .method(Method.POST)
+                .uri("/api/v1/health")
+                .body(Body.empty())
+        val invalidPath =
+            Request
+                .builder()
+                .method(Method.GET)
+                .uri("/api/v1/other")
+                .body(Body.empty())
 
         assertTrue(matcher.matches(validReq.extensions, validReq))
         assertFalse(matcher.matches(invalidMethod.extensions, invalidMethod))
