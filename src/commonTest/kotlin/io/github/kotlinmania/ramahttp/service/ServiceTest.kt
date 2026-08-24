@@ -1,6 +1,7 @@
 // port-lint: tests service/mod.rs
 package io.github.kotlinmania.ramahttp.service
 
+import io.github.kotlinmania.ramahttp.core.HttpService
 import io.github.kotlinmania.ramahttp.core.Service
 import io.github.kotlinmania.ramahttp.service.redirect.RedirectHttpToHttps
 import io.github.kotlinmania.ramahttp.service.redirect.RedirectStatic
@@ -45,8 +46,8 @@ class ServiceTest {
     @Test
     fun testRouter() = runTest {
         val router = Router.new()
-            .withGet("/hello", Service { _ -> Html("<h1>Hello</h1>").intoResponse() })
-            .withPost("/api/data", Service { _ -> Json("{\"status\":\"ok\"}").intoResponse() })
+            .withGet("/hello", HttpService { _ -> Html("<h1>Hello</h1>").intoResponse() })
+            .withPost("/api/data", HttpService { _ -> Json("{\"status\":\"ok\"}").intoResponse() })
 
         val req1 = Request.builder().method(Method.GET).uri("/hello").body(Body.empty())
         val res1 = router.serve(req1)
@@ -62,7 +63,7 @@ class ServiceTest {
     @Test
     fun testWebService() = runTest {
         val web = WebService.new()
-            .withGet("/status", Service { _ -> Json("{\"alive\":true}").intoResponse() })
+            .withGet("/status", HttpService { _ -> Json("{\"alive\":true}").intoResponse() })
 
         val req = Request.builder().method(Method.GET).uri("/status").body(Body.empty())
         val res = web.serve(req)

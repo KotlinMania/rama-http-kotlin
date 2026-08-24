@@ -1,8 +1,8 @@
 // port-lint: source layer/normalize_path.rs
 package io.github.kotlinmania.ramahttp.layer
 
-import io.github.kotlinmania.ramahttp.core.Layer
-import io.github.kotlinmania.ramahttp.core.Service
+import io.github.kotlinmania.ramahttp.core.HttpLayer
+import io.github.kotlinmania.ramahttp.core.HttpService
 import io.github.kotlinmania.ramahttp.types.Body
 import io.github.kotlinmania.ramahttp.types.PathAndQuery
 import io.github.kotlinmania.ramahttp.types.Request
@@ -16,9 +16,9 @@ public enum class NormalizeMode {
 
 public class NormalizePathLayer(
     private val mode: NormalizeMode = NormalizeMode.TRIM,
-) : Layer<Service<Request, Response>, Service<Request, Response>> {
+) : HttpLayer {
 
-    override fun layer(inner: Service<Request, Response>): Service<Request, Response> {
+    override fun layer(inner: HttpService): HttpService {
         return NormalizePath(inner, mode)
     }
 
@@ -29,9 +29,9 @@ public class NormalizePathLayer(
 }
 
 internal class NormalizePath(
-    private val inner: Service<Request, Response>,
+    private val inner: HttpService,
     private val mode: NormalizeMode = NormalizeMode.TRIM,
-) : Service<Request, Response> {
+) : HttpService {
 
     override suspend fun serve(req: Request): Response {
         val uri = req.uri

@@ -1,8 +1,8 @@
 // port-lint: source layer/sensitive_headers.rs
 package io.github.kotlinmania.ramahttp.layer
 
-import io.github.kotlinmania.ramahttp.core.Layer
-import io.github.kotlinmania.ramahttp.core.Service
+import io.github.kotlinmania.ramahttp.core.HttpLayer
+import io.github.kotlinmania.ramahttp.core.HttpService
 import io.github.kotlinmania.ramahttp.types.Body
 import io.github.kotlinmania.ramahttp.types.HeaderName
 import io.github.kotlinmania.ramahttp.types.Request
@@ -25,17 +25,17 @@ public class SensitiveHeaders(
 
 public class SensitiveHeadersLayer(
     private val sensitiveHeaders: Set<HeaderName> = SensitiveHeaders.DEFAULT_SENSITIVE_HEADERS,
-) : Layer<Service<Request, Response>, Service<Request, Response>> {
+) : HttpLayer {
 
-    override fun layer(inner: Service<Request, Response>): Service<Request, Response> {
+    override fun layer(inner: HttpService): HttpService {
         return SensitiveHeadersService(inner, sensitiveHeaders)
     }
 }
 
 internal class SensitiveHeadersService(
-    private val inner: Service<Request, Response>,
+    private val inner: HttpService,
     private val sensitiveHeaders: Set<HeaderName> = SensitiveHeaders.DEFAULT_SENSITIVE_HEADERS,
-) : Service<Request, Response> {
+) : HttpService {
 
     override suspend fun serve(req: Request): Response {
         req.extensions.insert(SensitiveHeaders(sensitiveHeaders))
