@@ -1,8 +1,8 @@
 // port-lint: source layer/auth/mod.rs
 package io.github.kotlinmania.ramahttp.layer
 
-import io.github.kotlinmania.ramahttp.core.Layer
-import io.github.kotlinmania.ramahttp.core.Service
+import io.github.kotlinmania.ramahttp.core.HttpLayer
+import io.github.kotlinmania.ramahttp.core.HttpService
 import io.github.kotlinmania.ramahttp.service.web.endpoint.response.intoResponse
 import io.github.kotlinmania.ramahttp.types.Body
 import io.github.kotlinmania.ramahttp.types.HeaderName
@@ -18,9 +18,9 @@ public fun interface TokenValidator {
 public class AddAuthorizationLayer(
     private val token: String,
     private val scheme: String = "Bearer",
-) : Layer<Service<Request, Response>, Service<Request, Response>> {
+) : HttpLayer {
 
-    override fun layer(inner: Service<Request, Response>): Service<Request, Response> {
+    override fun layer(inner: HttpService): HttpService {
         return AddAuthorizationService(inner, "$scheme $token")
     }
 
@@ -31,9 +31,9 @@ public class AddAuthorizationLayer(
 }
 
 internal class AddAuthorizationService(
-    private val inner: Service<Request, Response>,
+    private val inner: HttpService,
     private val authHeaderValue: String,
-) : Service<Request, Response> {
+) : HttpService {
 
     override suspend fun serve(req: Request): Response {
         req.headers.insert(HeaderName.AUTHORIZATION, HeaderValue.fromString(authHeaderValue))
@@ -44,20 +44,20 @@ internal class AddAuthorizationService(
 public class ValidateAuthorizationLayer(
     private val scheme: String = "Bearer",
     private val validator: TokenValidator,
-) : Layer<Service<Request, Response>, Service<Request, Response>> {
+) : HttpLayer {
 
     public constructor(validator: TokenValidator) : this("Bearer", validator)
 
-    override fun layer(inner: Service<Request, Response>): Service<Request, Response> {
+    override fun layer(inner: HttpService): HttpService {
         return ValidateAuthorizationService(inner, scheme, validator)
     }
 }
 
 internal class ValidateAuthorizationService(
-    private val inner: Service<Request, Response>,
+    private val inner: HttpService,
     private val scheme: String,
     private val validator: TokenValidator,
-) : Service<Request, Response> {
+) : HttpService {
 
     override suspend fun serve(req: Request): Response {
         val authHeader = req.headers.get(HeaderName.AUTHORIZATION)?.toStrOrNull()
