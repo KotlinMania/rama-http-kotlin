@@ -5,10 +5,10 @@ Based on AST analysis, here are the concrete next steps.
 ## Summary
 
 - **Files Present:** 39/205 (19.0%)
-- **Function parity:** 82/1749 matched (target 357) — 4.7%
-- **Class/type parity:** 26/582 matched (target 133) — 4.5%
-- **Combined symbol parity:** 108/2331 matched (target 490) — 4.6%
-- **Average inline-code cosine:** 0.19 (function body across 25 matched files)
+- **Function parity:** 82/1749 matched (target 358) — 4.7%
+- **Class/type parity:** 26/582 matched (target 136) — 4.5%
+- **Combined symbol parity:** 108/2331 matched (target 494) — 4.6%
+- **Average inline-code cosine:** 0.20 (function body across 25 matched files)
 - **Average documentation cosine:** 0.14 (doc text across 25 matched files)
 - **Cheat-zeroed Files:** 14
 - **Critical Issues:** 36 files with <0.60 function similarity
@@ -202,9 +202,9 @@ Every matched file is listed below with function and type symbol parity.
 ### 12. layer.set_status
 
 - **Target:** `layer.SetStatus`
-- **Similarity:** 0.44
+- **Similarity:** 0.48
 - **Dependents:** 1
-- **Priority Score:** 1040905.6
+- **Priority Score:** 1040905.2
 - **Functions:** 3/4 matched
 - **Missing functions:** `new`
 - **Types:** 2/5 matched (target 2)
@@ -216,7 +216,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 669310.0
-- **Functions:** 26/90 matched (target 38)
+- **Functions:** 26/90 matched (target 39)
 - **Missing functions:** `clone`, `fmt`, `or_method`, `and_method_delete`, `or_method_delete`, `and_method_get`, `or_method_get`, `and_method_head`, `or_method_head`, `and_method_options`, `or_method_options`, `and_method_patch`, `or_method_patch`, `and_method_post`, `or_method_post`, `and_method_put`, `or_method_put`, `and_method_trace`, `or_method_trace`, `and_method_connect`, `or_method_connect`, `subdomain`, `and_subdomain`, `or_domain`, `or_subdomain`, `and_version`, `or_version`, `uri_regex`, `uri_wildcard`, `and_uri_regex`, `and_uri_wildcard`, `or_uri_regex`, `or_uri_wildcard`, `path_literal`, `or_path`, `or_header`, `and_header_exists`, `or_header_exists`, `and_header_contains`, `or_header_contains`, `socket`, `and_socket`, `or_socket`, `get`, `and_custom`, `or_custom`, `any_subdomain`, `and_any_subdomain`, `or_any_subdomain`, `post`, `put`, `delete`, `patch`, `head`, `options`, `trace`, `connect`, `test_matcher_and_combination`, `test_matcher_negation_with_and_combination`, `test_matcher_and_combination_negated`, `test_matcher_ors_combination`, `test_matcher_negation_with_ors_combination`, `test_matcher_ors_combination_negated`, `test_matcher_or_and_or_and_negation`
 - **Types:** 1/3 matched (target 13)
 - **Missing types:** `HttpMatcherKind`, `BooleanMatcher`
@@ -249,9 +249,9 @@ Every matched file is listed below with function and type symbol parity.
 ### 16. layer.request_id
 
 - **Target:** `layer.RequestId`
-- **Similarity:** 0.08
+- **Similarity:** 0.09
 - **Dependents:** 0
-- **Priority Score:** 222909.2
+- **Priority Score:** 222909.1
 - **Functions:** 2/17 matched (target 6)
 - **Missing functions:** `new`, `header_value`, `into_header_value`, `from`, `request_id`, `x_request_id`, `into_layer`, `make_request_id`, `make_nano_id`, `basic`, `basic_with_request_id`, `other_middleware_setting_request_id_on_response`, `handler`, `uuid`, `nanoid`
 - **Types:** 5/12 matched (target 5)
@@ -491,7 +491,6 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 2)
 - **Missing types:** _none_
-- **Lint issues:** 1
 
 ### 36. util.mod
 
@@ -542,7 +541,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Priority Score:** 0.0
 - **Functions:** 0/0 matched
 - **Missing functions:** _none_
-- **Types:** 0/0 matched (target 18)
+- **Types:** 0/0 matched (target 21)
 - **Missing types:** _none_
 
 ## Success Criteria
