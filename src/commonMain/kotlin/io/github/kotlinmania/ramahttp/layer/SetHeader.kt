@@ -1,8 +1,8 @@
 // port-lint: source layer/set_header/mod.rs
 package io.github.kotlinmania.ramahttp.layer
 
-import io.github.kotlinmania.ramahttp.core.Layer
-import io.github.kotlinmania.ramahttp.core.Service
+import io.github.kotlinmania.ramahttp.core.HttpLayer
+import io.github.kotlinmania.ramahttp.core.HttpService
 import io.github.kotlinmania.ramahttp.types.Body
 import io.github.kotlinmania.ramahttp.types.HeaderName
 import io.github.kotlinmania.ramahttp.types.HeaderValue
@@ -13,9 +13,9 @@ public class SetRequestHeaderLayer(
     public val name: HeaderName,
     public val value: HeaderValue,
     public val override: Boolean = true,
-) : Layer<Service<Request, Response>, Service<Request, Response>> {
+) : HttpLayer {
 
-    override fun layer(inner: Service<Request, Response>): Service<Request, Response> {
+    override fun layer(inner: HttpService): HttpService {
         return SetRequestHeader(inner, name, value, override)
     }
 
@@ -29,11 +29,11 @@ public class SetRequestHeaderLayer(
 }
 
 internal class SetRequestHeader(
-    private val inner: Service<Request, Response>,
+    private val inner: HttpService,
     private val name: HeaderName,
     private val value: HeaderValue,
     private val override: Boolean = true,
-) : Service<Request, Response> {
+) : HttpService {
 
     override suspend fun serve(req: Request): Response {
         if (override || !req.headers.containsKey(name)) {
@@ -47,9 +47,9 @@ public class SetResponseHeaderLayer(
     public val name: HeaderName,
     public val value: HeaderValue,
     public val override: Boolean = true,
-) : Layer<Service<Request, Response>, Service<Request, Response>> {
+) : HttpLayer {
 
-    override fun layer(inner: Service<Request, Response>): Service<Request, Response> {
+    override fun layer(inner: HttpService): HttpService {
         return SetResponseHeader(inner, name, value, override)
     }
 
@@ -63,11 +63,11 @@ public class SetResponseHeaderLayer(
 }
 
 internal class SetResponseHeader(
-    private val inner: Service<Request, Response>,
+    private val inner: HttpService,
     private val name: HeaderName,
     private val value: HeaderValue,
     private val override: Boolean = true,
-) : Service<Request, Response> {
+) : HttpService {
 
     override suspend fun serve(req: Request): Response {
         val res = inner.serve(req)

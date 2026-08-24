@@ -1,6 +1,7 @@
 // port-lint: tests layer/mod.rs
 package io.github.kotlinmania.ramahttp.layer
 
+import io.github.kotlinmania.ramahttp.core.HttpService
 import io.github.kotlinmania.ramahttp.core.Service
 import io.github.kotlinmania.ramahttp.service.web.endpoint.response.intoResponse
 import io.github.kotlinmania.ramahttp.types.Body
@@ -23,7 +24,7 @@ class LayerTest {
 
     @Test
     fun testSetStatusLayer() = runTest {
-        val baseService = Service<Request, Response> { _ -> StatusCode.OK.intoResponse() }
+        val baseService = HttpService { _ -> StatusCode.OK.intoResponse() }
         val layer = SetStatusLayer(StatusCode.ACCEPTED)
         val service = layer.layer(baseService)
 
@@ -35,7 +36,7 @@ class LayerTest {
     @Test
     fun testNormalizePathLayer() = runTest {
         var observedPath: String? = null
-        val baseService = Service<Request, Response> { req ->
+        val baseService = HttpService { req ->
             observedPath = req.uri.path
             StatusCode.OK.intoResponse()
         }
@@ -49,7 +50,7 @@ class LayerTest {
 
     @Test
     fun testRequestIdLayer() = runTest {
-        val baseService = Service<Request, Response> { _ -> StatusCode.OK.intoResponse() }
+        val baseService = HttpService { _ -> StatusCode.OK.intoResponse() }
         val setReqId = SetRequestIdLayer(makeRequestId = { RequestId.fromString("req-12345") })
         val propReqId = PropagateRequestIdLayer()
 
@@ -62,7 +63,7 @@ class LayerTest {
 
     @Test
     fun testSetAndRemoveHeaderLayer() = runTest {
-        val baseService = Service<Request, Response> { _ ->
+        val baseService = HttpService { _ ->
             val res = StatusCode.OK.intoResponse()
             res.headers.append(HeaderName.SERVER, HeaderValue.fromString("rama/0.1"))
             res
@@ -83,7 +84,7 @@ class LayerTest {
 
     @Test
     fun testCorsLayer() = runTest {
-        val baseService = Service<Request, Response> { _ -> StatusCode.OK.intoResponse() }
+        val baseService = HttpService { _ -> StatusCode.OK.intoResponse() }
         val cors = CorsLayer.permissive()
         val service = cors.layer(baseService)
 
@@ -106,7 +107,7 @@ class LayerTest {
 
     @Test
     fun testAuthLayer() = runTest {
-        val baseService = Service<Request, Response> { _ -> StatusCode.OK.intoResponse() }
+        val baseService = HttpService { _ -> StatusCode.OK.intoResponse() }
         val validateAuth = ValidateAuthorizationLayer("Bearer") { token -> token == "secret-token" }
         val service = validateAuth.layer(baseService)
 
@@ -124,7 +125,7 @@ class LayerTest {
     @Test
     fun testClassifyAndRetry() = runTest {
         var attempts = 0
-        val flakyService = Service<Request, Response> { _ ->
+        val flakyService = HttpService { _ ->
             attempts++
             if (attempts < 3) {
                 StatusCode.INTERNAL_SERVER_ERROR.intoResponse()
