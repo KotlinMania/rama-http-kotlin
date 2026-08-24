@@ -37,8 +37,8 @@ public class Method private constructor(
             return fromString(str)
         }
 
-        public fun fromString(str: String): Method {
-            return when (str.uppercase()) {
+        public fun fromString(str: String): Method =
+            when (str.uppercase()) {
                 "OPTIONS" -> OPTIONS
                 "GET" -> GET
                 "POST" -> POST
@@ -50,6 +50,5 @@ public class Method private constructor(
                 "PATCH" -> PATCH
                 else -> Method(str)
             }
-        }
     }
 }

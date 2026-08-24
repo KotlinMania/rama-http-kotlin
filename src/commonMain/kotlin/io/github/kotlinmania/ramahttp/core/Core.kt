@@ -14,35 +14,25 @@ public class Extensions {
         return map.put(kClass, value) as? T
     }
 
-    public inline fun <reified T : Any> insert(value: T): T? {
-        return insert(T::class, value)
-    }
+    public inline fun <reified T : Any> insert(value: T): T? = insert(T::class, value)
 
     public fun <T : Any> get(kClass: KClass<T>): T? {
         @Suppress("UNCHECKED_CAST")
         return map[kClass] as? T
     }
 
-    public inline fun <reified T : Any> get(): T? {
-        return get(T::class)
-    }
+    public inline fun <reified T : Any> get(): T? = get(T::class)
 
     public fun <T : Any> remove(kClass: KClass<T>): T? {
         @Suppress("UNCHECKED_CAST")
         return map.remove(kClass) as? T
     }
 
-    public inline fun <reified T : Any> remove(): T? {
-        return remove(T::class)
-    }
+    public inline fun <reified T : Any> remove(): T? = remove(T::class)
 
-    public fun <T : Any> contains(kClass: KClass<T>): Boolean {
-        return map.containsKey(kClass)
-    }
+    public fun <T : Any> contains(kClass: KClass<T>): Boolean = map.containsKey(kClass)
 
-    public inline fun <reified T : Any> contains(): Boolean {
-        return contains(T::class)
-    }
+    public inline fun <reified T : Any> contains(): Boolean = contains(T::class)
 
     public fun clear() {
         map.clear()

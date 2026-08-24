@@ -40,15 +40,16 @@ public class CorsLayer : HttpLayer {
     }
 
     public fun allowAnyMethod(): CorsLayer {
-        this.allowMethods = listOf(
-            Method.GET,
-            Method.POST,
-            Method.PUT,
-            Method.DELETE,
-            Method.PATCH,
-            Method.HEAD,
-            Method.OPTIONS,
-        )
+        this.allowMethods =
+            listOf(
+                Method.GET,
+                Method.POST,
+                Method.PUT,
+                Method.DELETE,
+                Method.PATCH,
+                Method.HEAD,
+                Method.OPTIONS,
+            )
         return this
     }
 
@@ -58,12 +59,13 @@ public class CorsLayer : HttpLayer {
     }
 
     public fun allowAnyHeader(): CorsLayer {
-        this.allowHeaders = listOf(
-            HeaderName.ACCEPT,
-            HeaderName.ACCEPT_LANGUAGE,
-            HeaderName.CONTENT_LANGUAGE,
-            HeaderName.CONTENT_TYPE,
-        )
+        this.allowHeaders =
+            listOf(
+                HeaderName.ACCEPT,
+                HeaderName.ACCEPT_LANGUAGE,
+                HeaderName.CONTENT_LANGUAGE,
+                HeaderName.CONTENT_TYPE,
+            )
         return this
     }
 
@@ -82,8 +84,8 @@ public class CorsLayer : HttpLayer {
         return this
     }
 
-    override fun layer(inner: HttpService): HttpService {
-        return CorsService(
+    override fun layer(inner: HttpService): HttpService =
+        CorsService(
             inner = inner,
             allowOrigin = allowOrigin,
             allowMethods = allowMethods,
@@ -92,7 +94,6 @@ public class CorsLayer : HttpLayer {
             allowCredentials = allowCredentials,
             maxAge = maxAge,
         )
-    }
 
     public companion object {
         public fun permissive(): CorsLayer =
@@ -112,7 +113,6 @@ internal class CorsService(
     private val allowCredentials: Boolean,
     private val maxAge: Long?,
 ) : HttpService {
-
     override suspend fun serve(req: Request): Response {
         val isPreflight = req.method == Method.OPTIONS && req.headers.containsKey(HeaderName.ACCESS_CONTROL_REQUEST_METHOD)
 

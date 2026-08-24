@@ -12,18 +12,11 @@ import io.github.kotlinmania.ramahttp.types.Request
 public class MethodMatcher private constructor(
     public val bits: UShort,
 ) : Matcher<Request> {
+    public fun or(other: MethodMatcher): MethodMatcher = MethodMatcher((this.bits or other.bits))
 
-    public fun or(other: MethodMatcher): MethodMatcher {
-        return MethodMatcher((this.bits or other.bits))
-    }
+    public fun and(other: MethodMatcher): MethodMatcher = MethodMatcher((this.bits and other.bits))
 
-    public fun and(other: MethodMatcher): MethodMatcher {
-        return MethodMatcher((this.bits and other.bits))
-    }
-
-    public fun contains(other: MethodMatcher): Boolean {
-        return (this.bits and other.bits) == other.bits
-    }
+    public fun contains(other: MethodMatcher): Boolean = (this.bits and other.bits) == other.bits
 
     override fun matches(ext: Extensions?, req: Request): Boolean {
         val methodMatcher = fromMethod(req.method) ?: return false
@@ -51,8 +44,8 @@ public class MethodMatcher private constructor(
 
         public fun fromBits(bits: UShort): MethodMatcher = MethodMatcher(bits)
 
-        public fun fromMethod(method: Method): MethodMatcher? {
-            return when (method) {
+        public fun fromMethod(method: Method): MethodMatcher? =
+            when (method) {
                 Method.CONNECT -> CONNECT
                 Method.DELETE -> DELETE
                 Method.GET -> GET
@@ -77,6 +70,5 @@ public class MethodMatcher private constructor(
                     }
                 }
             }
-        }
     }
 }

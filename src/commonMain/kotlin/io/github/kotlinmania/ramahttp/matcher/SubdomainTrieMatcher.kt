@@ -9,7 +9,6 @@ import io.github.kotlinmania.ramahttp.types.Request
 public class SubdomainTrieMatcher(
     domains: List<String>,
 ) : Matcher<Request> {
-
     private class Node {
         var isTerminal: Boolean = false
         val children: MutableMap<String, Node> = mutableMapOf()
@@ -48,9 +47,13 @@ public class SubdomainTrieMatcher(
     }
 
     override fun matches(ext: Extensions?, req: Request): Boolean {
-        val host = req.uri.host
-            ?: req.headers.get(HeaderName.HOST)?.toStrOrNull()?.substringBefore(':')
-            ?: return false
+        val host =
+            req.uri.host
+                ?: req.headers
+                    .get(HeaderName.HOST)
+                    ?.toStrOrNull()
+                    ?.substringBefore(':')
+                ?: return false
         return isMatch(host)
     }
 

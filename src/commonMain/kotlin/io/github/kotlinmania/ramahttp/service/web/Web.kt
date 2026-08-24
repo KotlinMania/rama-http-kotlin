@@ -5,7 +5,6 @@ import io.github.kotlinmania.ramahttp.core.HttpService
 import io.github.kotlinmania.ramahttp.core.Service
 import io.github.kotlinmania.ramahttp.matcher.HttpMatcher
 import io.github.kotlinmania.ramahttp.service.web.endpoint.response.intoResponse
-import io.github.kotlinmania.ramahttp.types.Body
 import io.github.kotlinmania.ramahttp.types.Request
 import io.github.kotlinmania.ramahttp.types.Response
 import io.github.kotlinmania.ramahttp.types.StatusCode

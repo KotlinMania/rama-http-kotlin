@@ -1,9 +1,13 @@
 // port-lint: source types/uri.rs
 package io.github.kotlinmania.ramahttp.types
 
-public class Scheme(public val asStr: String) {
+public class Scheme(
+    public val asStr: String,
+) {
     override fun toString(): String = asStr
+
     override fun equals(other: Any?): Boolean = other is Scheme && asStr.equals(other.asStr, ignoreCase = true)
+
     override fun hashCode(): Int = asStr.lowercase().hashCode()
 
     public companion object {
@@ -12,7 +16,9 @@ public class Scheme(public val asStr: String) {
     }
 }
 
-public class Authority(public val asStr: String) {
+public class Authority(
+    public val asStr: String,
+) {
     public val host: String
     public val portU16: Int?
 
@@ -36,7 +42,9 @@ public class Authority(public val asStr: String) {
     }
 
     override fun toString(): String = asStr
+
     override fun equals(other: Any?): Boolean = other is Authority && asStr == other.asStr
+
     override fun hashCode(): Int = asStr.hashCode()
 
     public companion object {
@@ -44,7 +52,9 @@ public class Authority(public val asStr: String) {
     }
 }
 
-public class PathAndQuery(public val asStr: String) {
+public class PathAndQuery(
+    public val asStr: String,
+) {
     public val path: String
     public val query: String?
 
@@ -60,7 +70,9 @@ public class PathAndQuery(public val asStr: String) {
     }
 
     override fun toString(): String = asStr
+
     override fun equals(other: Any?): Boolean = other is PathAndQuery && asStr == other.asStr
+
     override fun hashCode(): Int = asStr.hashCode()
 
     public companion object {
@@ -114,9 +126,7 @@ public class Uri(
     override fun hashCode(): Int = toString().hashCode()
 
     public companion object {
-        public fun fromParts(parts: UriParts): Uri {
-            return Uri(parts.scheme, parts.authority, parts.pathAndQuery)
-        }
+        public fun fromParts(parts: UriParts): Uri = Uri(parts.scheme, parts.authority, parts.pathAndQuery)
 
         public fun fromString(str: String): Uri {
             var input = str.trim()
@@ -130,12 +140,13 @@ public class Uri(
                 input = input.substring(schemeIdx + 3)
                 val slashIdx = input.indexOf('/')
                 val qIdx = input.indexOf('?')
-                val endAuth = when {
-                    slashIdx != -1 && qIdx != -1 -> minOf(slashIdx, qIdx)
-                    slashIdx != -1 -> slashIdx
-                    qIdx != -1 -> qIdx
-                    else -> -1
-                }
+                val endAuth =
+                    when {
+                        slashIdx != -1 && qIdx != -1 -> minOf(slashIdx, qIdx)
+                        slashIdx != -1 -> slashIdx
+                        qIdx != -1 -> qIdx
+                        else -> -1
+                    }
                 if (endAuth != -1) {
                     authority = Authority(input.substring(0, endAuth))
                     input = input.substring(endAuth)

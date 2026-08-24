@@ -8,7 +8,6 @@ import io.github.kotlinmania.ramahttp.types.HeaderValue
 import io.github.kotlinmania.ramahttp.types.Request
 import io.github.kotlinmania.ramahttp.types.Response
 import io.github.kotlinmania.ramahttp.types.StatusCode
-import io.github.kotlinmania.ramahttp.types.Uri
 
 /**
  * Service that redirects all HTTP requests to HTTPS.
@@ -18,7 +17,6 @@ public class RedirectHttpToHttps(
     public val overwritePort: Int? = null,
     public val dropQuery: Boolean = false,
 ) : Service<Request, Response> {
-
     public fun statusMoved(): RedirectHttpToHttps =
         RedirectHttpToHttps(StatusCode.MOVED_PERMANENTLY, overwritePort, dropQuery)
 
@@ -46,7 +44,8 @@ public class RedirectHttpToHttps(
 
         val redirectTarget = "$scheme://$host$portPart$path"
 
-        return Response.builder()
+        return Response
+            .builder()
             .status(statusCode)
             .header(HeaderName.LOCATION, HeaderValue.fromString(redirectTarget))
             .body(Body.empty())
@@ -64,13 +63,12 @@ public class RedirectStatic(
     public val location: String,
     public val statusCode: StatusCode = StatusCode.SEE_OTHER,
 ) : Service<Request, Response> {
-
-    override suspend fun serve(req: Request): Response {
-        return Response.builder()
+    override suspend fun serve(req: Request): Response =
+        Response
+            .builder()
             .status(statusCode)
             .header(HeaderName.LOCATION, HeaderValue.fromString(location))
             .body(Body.empty())
-    }
 
     public companion object {
         public fun to(loc: String): RedirectStatic =

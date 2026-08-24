@@ -3,7 +3,6 @@ package io.github.kotlinmania.ramahttp.layer
 
 import io.github.kotlinmania.ramahttp.core.HttpLayer
 import io.github.kotlinmania.ramahttp.core.HttpService
-import io.github.kotlinmania.ramahttp.types.Body
 import io.github.kotlinmania.ramahttp.types.HeaderName
 import io.github.kotlinmania.ramahttp.types.HeaderValue
 import io.github.kotlinmania.ramahttp.types.Request
@@ -14,10 +13,7 @@ public class SetRequestHeaderLayer(
     public val value: HeaderValue,
     public val override: Boolean = true,
 ) : HttpLayer {
-
-    override fun layer(inner: HttpService): HttpService {
-        return SetRequestHeader(inner, name, value, override)
-    }
+    override fun layer(inner: HttpService): HttpService = SetRequestHeader(inner, name, value, override)
 
     public companion object {
         public fun overriding(name: HeaderName, value: HeaderValue): SetRequestHeaderLayer =
@@ -34,7 +30,6 @@ internal class SetRequestHeader(
     private val value: HeaderValue,
     private val override: Boolean = true,
 ) : HttpService {
-
     override suspend fun serve(req: Request): Response {
         if (override || !req.headers.containsKey(name)) {
             req.headers.insert(name, value)
@@ -48,10 +43,7 @@ public class SetResponseHeaderLayer(
     public val value: HeaderValue,
     public val override: Boolean = true,
 ) : HttpLayer {
-
-    override fun layer(inner: HttpService): HttpService {
-        return SetResponseHeader(inner, name, value, override)
-    }
+    override fun layer(inner: HttpService): HttpService = SetResponseHeader(inner, name, value, override)
 
     public companion object {
         public fun overriding(name: HeaderName, value: HeaderValue): SetResponseHeaderLayer =
@@ -68,7 +60,6 @@ internal class SetResponseHeader(
     private val value: HeaderValue,
     private val override: Boolean = true,
 ) : HttpService {
-
     override suspend fun serve(req: Request): Response {
         val res = inner.serve(req)
         if (override || !res.headers.containsKey(name)) {
