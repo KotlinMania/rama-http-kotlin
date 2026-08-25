@@ -10,14 +10,15 @@ import kotlin.test.Test
 import kotlin.test.assertTrue
 
 class CurlTest {
-
     @Test
     fun testCurlGet() {
-        val req = Request.builder()
-            .method(Method.GET)
-            .uri("https://httpbin.org/get")
-            .header(HeaderName.ACCEPT, HeaderValue.fromString("application/json"))
-            .body(Body.empty())
+        val req =
+            Request
+                .builder()
+                .method(Method.GET)
+                .uri("https://httpbin.org/get")
+                .header(HeaderName.ACCEPT, HeaderValue.fromString("application/json"))
+                .body(Body.empty())
 
         val cmd = cmdStringForRequest(req)
         assertTrue(cmd.contains("curl"))
@@ -28,10 +29,12 @@ class CurlTest {
     @Test
     fun testCurlPostData() {
         val payload = "hello=world".encodeToByteArray()
-        val req = Request.builder()
-            .method(Method.POST)
-            .uri("https://httpbin.org/post")
-            .body(Body.fromBytes(payload))
+        val req =
+            Request
+                .builder()
+                .method(Method.POST)
+                .uri("https://httpbin.org/post")
+                .body(Body.fromBytes(payload))
 
         val cmd = cmdStringForRequest(req, payload)
         assertTrue(cmd.contains("curl"))

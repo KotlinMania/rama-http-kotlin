@@ -11,11 +11,16 @@ public class HeaderMatcher private constructor(
     private val name: HeaderName,
     private val kind: Kind,
 ) : Matcher<Request> {
-
     private sealed class Kind {
         object Exists : Kind()
-        class Is(val value: HeaderValue) : Kind()
-        class Contains(val value: HeaderValue) : Kind()
+
+        class Is(
+            val value: HeaderValue,
+        ) : Kind()
+
+        class Contains(
+            val value: HeaderValue,
+        ) : Kind()
     }
 
     override fun matches(ext: Extensions?, req: Request): Boolean {

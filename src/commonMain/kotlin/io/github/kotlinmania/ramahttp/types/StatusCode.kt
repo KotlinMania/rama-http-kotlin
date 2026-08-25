@@ -10,16 +10,21 @@ public class StatusCode(
     public constructor(code: Int) : this(code.toUShort())
 
     public fun asU16(): UShort = code
+
     public fun asInt(): Int = code.toInt()
 
     public fun isInformational(): Boolean = code in 100u..199u
+
     public fun isSuccess(): Boolean = code in 200u..299u
+
     public fun isRedirection(): Boolean = code in 300u..399u
+
     public fun isClientError(): Boolean = code in 400u..499u
+
     public fun isServerError(): Boolean = code in 500u..599u
 
-    public fun canonicalReason(): String? {
-        return when (code.toInt()) {
+    public fun canonicalReason(): String? =
+        when (code.toInt()) {
             100 -> "Continue"
             101 -> "Switching Protocols"
             102 -> "Processing"
@@ -84,7 +89,6 @@ public class StatusCode(
             511 -> "Network Authentication Required"
             else -> null
         }
-    }
 
     override fun toString(): String = code.toString()
 
@@ -156,7 +160,9 @@ public class StatusCode(
         public val NETWORK_AUTHENTICATION_REQUIRED: StatusCode = StatusCode(511)
 
         public fun fromU16(code: UShort): StatusCode = StatusCode(code)
+
         public fun fromU16(code: Int): StatusCode = StatusCode(code.toUShort())
+
         public fun fromInt(code: Int): StatusCode = StatusCode(code.toUShort())
     }
 }

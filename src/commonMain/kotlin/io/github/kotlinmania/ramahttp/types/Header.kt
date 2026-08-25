@@ -23,13 +23,9 @@ public class HeaderName private constructor(
     override fun hashCode(): Int = normalized.hashCode()
 
     public companion object {
-        public fun fromStatic(name: String): HeaderName {
-            return HeaderName(name.lowercase(), name)
-        }
+        public fun fromStatic(name: String): HeaderName = HeaderName(name.lowercase(), name)
 
-        public fun fromString(name: String): HeaderName {
-            return HeaderName(name.lowercase(), name)
-        }
+        public fun fromString(name: String): HeaderName = HeaderName(name.lowercase(), name)
 
         public val ACCEPT: HeaderName = fromStatic("accept")
         public val ACCEPT_CHARSET: HeaderName = fromStatic("accept-charset")
@@ -112,17 +108,17 @@ public class HeaderValue(
     private val bytes: ByteArray,
 ) {
     public constructor(str: String) : this(str.encodeToByteArray())
+
     public fun asBytes(): ByteArray = bytes.copyOf()
 
     public fun toStr(): String = bytes.decodeToString()
 
-    public fun toStrOrNull(): String? {
-        return try {
+    public fun toStrOrNull(): String? =
+        try {
             bytes.decodeToString()
         } catch (_: Throwable) {
             null
         }
-    }
 
     override fun toString(): String = toStr()
 
@@ -136,8 +132,11 @@ public class HeaderValue(
 
     public companion object {
         public fun fromStatic(str: String): HeaderValue = HeaderValue(str.encodeToByteArray())
+
         public fun fromString(str: String): HeaderValue = HeaderValue(str.encodeToByteArray())
+
         public fun fromBytes(bytes: ByteArray): HeaderValue = HeaderValue(bytes.copyOf())
+
         public fun fromName(name: HeaderName): HeaderValue = fromString(name.asStr())
     }
 }
@@ -156,21 +155,13 @@ public class HeaderMap : Iterable<Pair<HeaderName, HeaderValue>> {
         }
     }
 
-    public fun get(name: HeaderName): HeaderValue? {
-        return map[name]?.firstOrNull()
-    }
+    public fun get(name: HeaderName): HeaderValue? = map[name]?.firstOrNull()
 
-    public fun get(name: String): HeaderValue? {
-        return get(HeaderName.fromString(name))
-    }
+    public fun get(name: String): HeaderValue? = get(HeaderName.fromString(name))
 
-    public fun getAll(name: HeaderName): List<HeaderValue> {
-        return map[name]?.toList() ?: emptyList()
-    }
+    public fun getAll(name: HeaderName): List<HeaderValue> = map[name]?.toList() ?: emptyList()
 
-    public fun getAll(name: String): List<HeaderValue> {
-        return getAll(HeaderName.fromString(name))
-    }
+    public fun getAll(name: String): List<HeaderValue> = getAll(HeaderName.fromString(name))
 
     public fun insert(name: HeaderName, value: HeaderValue): HeaderValue? {
         val prev = map[name]?.firstOrNull()
@@ -178,9 +169,7 @@ public class HeaderMap : Iterable<Pair<HeaderName, HeaderValue>> {
         return prev
     }
 
-    public fun insert(name: String, value: String): HeaderValue? {
-        return insert(HeaderName.fromString(name), HeaderValue.fromString(value))
-    }
+    public fun insert(name: String, value: String): HeaderValue? = insert(HeaderName.fromString(name), HeaderValue.fromString(value))
 
     public fun append(name: HeaderName, value: HeaderValue) {
         map.getOrPut(name) { mutableListOf() }.add(value)
@@ -195,17 +184,11 @@ public class HeaderMap : Iterable<Pair<HeaderName, HeaderValue>> {
         return list?.firstOrNull()
     }
 
-    public fun remove(name: String): HeaderValue? {
-        return remove(HeaderName.fromString(name))
-    }
+    public fun remove(name: String): HeaderValue? = remove(HeaderName.fromString(name))
 
-    public fun containsKey(name: HeaderName): Boolean {
-        return map.containsKey(name)
-    }
+    public fun containsKey(name: HeaderName): Boolean = map.containsKey(name)
 
-    public fun containsKey(name: String): Boolean {
-        return containsKey(HeaderName.fromString(name))
-    }
+    public fun containsKey(name: String): Boolean = containsKey(HeaderName.fromString(name))
 
     public fun contains(name: HeaderName): Boolean = containsKey(name)
 
@@ -229,9 +212,7 @@ public class HeaderMap : Iterable<Pair<HeaderName, HeaderValue>> {
 
     public fun isEmpty(): Boolean = map.isEmpty()
 
-    override fun iterator(): Iterator<Pair<HeaderName, HeaderValue>> {
-        return entries().iterator()
-    }
+    override fun iterator(): Iterator<Pair<HeaderName, HeaderValue>> = entries().iterator()
 
     public fun clone(): HeaderMap = HeaderMap(this)
 }

@@ -1,20 +1,16 @@
 // port-lint: source layer/set_status.rs
 package io.github.kotlinmania.ramahttp.layer
 
-import io.github.kotlinmania.ramahttp.core.Layer
-import io.github.kotlinmania.ramahttp.core.Service
-import io.github.kotlinmania.ramahttp.types.Body
+import io.github.kotlinmania.ramahttp.core.HttpLayer
+import io.github.kotlinmania.ramahttp.core.HttpService
 import io.github.kotlinmania.ramahttp.types.Request
 import io.github.kotlinmania.ramahttp.types.Response
 import io.github.kotlinmania.ramahttp.types.StatusCode
 
 public class SetStatusLayer(
     public val status: StatusCode,
-) : Layer<Service<Request, Response>, Service<Request, Response>> {
-
-    override fun layer(inner: Service<Request, Response>): Service<Request, Response> {
-        return SetStatus(inner, status)
-    }
+) : HttpLayer {
+    override fun layer(inner: HttpService): HttpService = SetStatus(inner, status)
 
     public companion object {
         public fun ok(): SetStatusLayer = SetStatusLayer(StatusCode.OK)
@@ -22,10 +18,9 @@ public class SetStatusLayer(
 }
 
 internal class SetStatus(
-    private val inner: Service<Request, Response>,
+    private val inner: HttpService,
     private val status: StatusCode,
-) : Service<Request, Response> {
-
+) : HttpService {
     override suspend fun serve(req: Request): Response {
         val res = inner.serve(req)
         res.status = status
@@ -33,7 +28,7 @@ internal class SetStatus(
     }
 
     public companion object {
-        public fun ok(inner: Service<Request, Response>): SetStatus =
+        public fun ok(inner: HttpService): SetStatus =
             SetStatus(inner, StatusCode.OK)
     }
 }

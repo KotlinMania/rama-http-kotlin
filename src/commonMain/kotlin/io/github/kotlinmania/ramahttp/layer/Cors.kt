@@ -1,8 +1,8 @@
 // port-lint: source layer/cors/mod.rs
 package io.github.kotlinmania.ramahttp.layer
 
-import io.github.kotlinmania.ramahttp.core.Layer
-import io.github.kotlinmania.ramahttp.core.Service
+import io.github.kotlinmania.ramahttp.core.HttpLayer
+import io.github.kotlinmania.ramahttp.core.HttpService
 import io.github.kotlinmania.ramahttp.types.Body
 import io.github.kotlinmania.ramahttp.types.HeaderName
 import io.github.kotlinmania.ramahttp.types.HeaderValue
@@ -11,7 +11,7 @@ import io.github.kotlinmania.ramahttp.types.Request
 import io.github.kotlinmania.ramahttp.types.Response
 import io.github.kotlinmania.ramahttp.types.StatusCode
 
-public class CorsLayer : Layer<Service<Request, Response>, Service<Request, Response>> {
+public class CorsLayer : HttpLayer {
     private var allowOrigin: HeaderValue? = null
     private var allowMethods: List<Method>? = null
     private var allowHeaders: List<HeaderName>? = null
@@ -40,15 +40,16 @@ public class CorsLayer : Layer<Service<Request, Response>, Service<Request, Resp
     }
 
     public fun allowAnyMethod(): CorsLayer {
-        this.allowMethods = listOf(
-            Method.GET,
-            Method.POST,
-            Method.PUT,
-            Method.DELETE,
-            Method.PATCH,
-            Method.HEAD,
-            Method.OPTIONS,
-        )
+        this.allowMethods =
+            listOf(
+                Method.GET,
+                Method.POST,
+                Method.PUT,
+                Method.DELETE,
+                Method.PATCH,
+                Method.HEAD,
+                Method.OPTIONS,
+            )
         return this
     }
 
@@ -58,12 +59,13 @@ public class CorsLayer : Layer<Service<Request, Response>, Service<Request, Resp
     }
 
     public fun allowAnyHeader(): CorsLayer {
-        this.allowHeaders = listOf(
-            HeaderName.ACCEPT,
-            HeaderName.AUTHORIZATION,
-            HeaderName.CONTENT_TYPE,
-            HeaderName.ORIGIN,
-        )
+        this.allowHeaders =
+            listOf(
+                HeaderName.ACCEPT,
+                HeaderName.ACCEPT_LANGUAGE,
+                HeaderName.CONTENT_LANGUAGE,
+                HeaderName.CONTENT_TYPE,
+            )
         return this
     }
 
@@ -72,7 +74,7 @@ public class CorsLayer : Layer<Service<Request, Response>, Service<Request, Resp
         return this
     }
 
-    public fun allowCredentials(allow: Boolean): CorsLayer {
+    public fun allowCredentials(allow: Boolean = true): CorsLayer {
         this.allowCredentials = allow
         return this
     }
@@ -82,8 +84,8 @@ public class CorsLayer : Layer<Service<Request, Response>, Service<Request, Resp
         return this
     }
 
-    override fun layer(inner: Service<Request, Response>): Service<Request, Response> {
-        return CorsService(
+    override fun layer(inner: HttpService): HttpService =
+        CorsService(
             inner = inner,
             allowOrigin = allowOrigin,
             allowMethods = allowMethods,
@@ -92,7 +94,6 @@ public class CorsLayer : Layer<Service<Request, Response>, Service<Request, Resp
             allowCredentials = allowCredentials,
             maxAge = maxAge,
         )
-    }
 
     public companion object {
         public fun permissive(): CorsLayer =
@@ -104,15 +105,14 @@ public class CorsLayer : Layer<Service<Request, Response>, Service<Request, Resp
 }
 
 internal class CorsService(
-    private val inner: Service<Request, Response>,
+    private val inner: HttpService,
     private val allowOrigin: HeaderValue?,
     private val allowMethods: List<Method>?,
     private val allowHeaders: List<HeaderName>?,
     private val exposeHeaders: List<HeaderName>?,
     private val allowCredentials: Boolean,
     private val maxAge: Long?,
-) : Service<Request, Response> {
-
+) : HttpService {
     override suspend fun serve(req: Request): Response {
         val isPreflight = req.method == Method.OPTIONS && req.headers.containsKey(HeaderName.ACCESS_CONTROL_REQUEST_METHOD)
 

@@ -31,19 +31,32 @@ public class UriParams(
 }
 
 public sealed class PathFragment {
-    public class Literal(public val literal: String) : PathFragment()
-    public class Param(public val name: String) : PathFragment()
+    public class Literal(
+        public val literal: String,
+    ) : PathFragment()
+
+    public class Param(
+        public val name: String,
+    ) : PathFragment()
+
     public object Glob : PathFragment()
 }
 
 public class PathMatcher private constructor(
     private val kind: Kind,
 ) : Matcher<Request> {
-
     private sealed class Kind {
-        class Prefix(val prefix: String) : Kind()
-        class Literal(val literal: String) : Kind()
-        class FragmentList(val fragments: List<PathFragment>) : Kind()
+        class Prefix(
+            val prefix: String,
+        ) : Kind()
+
+        class Literal(
+            val literal: String,
+        ) : Kind()
+
+        class FragmentList(
+            val fragments: List<PathFragment>,
+        ) : Kind()
     }
 
     public fun matchesPath(ext: Extensions?, rawPath: String): Boolean {
@@ -116,9 +129,7 @@ public class PathMatcher private constructor(
         }
     }
 
-    override fun matches(ext: Extensions?, req: Request): Boolean {
-        return matchesPath(ext, req.uri.path)
-    }
+    override fun matches(ext: Extensions?, req: Request): Boolean = matchesPath(ext, req.uri.path)
 
     public companion object {
         public fun new(path: String): PathMatcher {

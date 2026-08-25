@@ -27,15 +27,14 @@ public class Response(
     public companion object {
         public fun builder(): ResponseBuilder = ResponseBuilder()
 
-        public fun new(body: Body): Response {
-            return Response(
+        public fun new(body: Body): Response =
+            Response(
                 status = StatusCode.OK,
                 version = Version.HTTP_11,
                 headers = HeaderMap(),
                 extensions = Extensions(),
                 body = body,
             )
-        }
 
         public fun default(): Response = new(Body.empty())
     }
@@ -45,6 +44,7 @@ public class ResponseBuilder {
     private var status: StatusCode = StatusCode.OK
     private var version: Version = Version.HTTP_11
     private val headers: HeaderMap = HeaderMap()
+
     @PublishedApi
     internal val extensions: Extensions = Extensions()
 
@@ -78,15 +78,14 @@ public class ResponseBuilder {
         return this
     }
 
-    public fun body(body: Body): Response {
-        return Response(
+    public fun body(body: Body): Response =
+        Response(
             status = status,
             version = version,
             headers = headers,
             extensions = extensions,
             body = body,
         )
-    }
 
     public fun body(text: String): Response = body(Body.fromString(text))
 
