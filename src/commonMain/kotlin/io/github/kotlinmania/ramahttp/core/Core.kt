@@ -1,4 +1,4 @@
-// port-lint: source core/mod.rs
+// port-lint: source rama-http/src/core/mod.rs
 package io.github.kotlinmania.ramahttp.core
 
 import kotlin.reflect.KClass

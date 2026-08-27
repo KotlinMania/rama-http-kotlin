@@ -1,4 +1,4 @@
-// port-lint: tests matcher/mod.rs
+// port-lint: tests rama-http/src/matcher/mod.rs
 package io.github.kotlinmania.ramahttp.matcher
 
 import io.github.kotlinmania.ramahttp.core.Extensions

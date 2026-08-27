@@ -1,4 +1,4 @@
-// port-lint: source io/upgrade.rs
+// port-lint: source rama-http/src/io/upgrade.rs
 package io.github.kotlinmania.ramahttp.io
 
 import io.github.kotlinmania.ramahttp.HeaderName

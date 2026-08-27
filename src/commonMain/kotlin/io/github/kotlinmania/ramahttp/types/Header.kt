@@ -1,4 +1,4 @@
-// port-lint: source types/header.rs
+// port-lint: source rama-http/src/types/header.rs
 package io.github.kotlinmania.ramahttp.types
 
 /**

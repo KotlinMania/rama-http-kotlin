@@ -1,4 +1,4 @@
-// port-lint: source types/method.rs
+// port-lint: source rama-http/src/types/method.rs
 package io.github.kotlinmania.ramahttp.types
 
 /**

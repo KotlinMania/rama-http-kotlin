@@ -1,4 +1,4 @@
-// port-lint: tests types/method.rs
+// port-lint: tests rama-http/src/types/method.rs
 package io.github.kotlinmania.ramahttp.types
 
 import kotlin.test.Test

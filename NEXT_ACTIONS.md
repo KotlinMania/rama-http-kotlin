@@ -5,13 +5,13 @@ Based on AST analysis, here are the concrete next steps.
 ## Summary
 
 - **Files Present:** 39/205 (19.0%)
-- **Function parity:** 82/1749 matched (target 360) — 4.7%
-- **Class/type parity:** 26/582 matched (target 136) — 4.5%
-- **Combined symbol parity:** 108/2331 matched (target 496) — 4.6%
-- **Average inline-code cosine:** 0.20 (function body across 25 matched files)
-- **Average documentation cosine:** 0.14 (doc text across 25 matched files)
-- **Cheat-zeroed Files:** 14
-- **Critical Issues:** 36 files with <0.60 function similarity
+- **Function parity:** 82/1974 matched (target 360) — 4.2%
+- **Class/type parity:** 26/646 matched (target 136) — 4.0%
+- **Combined symbol parity:** 108/2620 matched (target 496) — 4.1%
+- **Average inline-code cosine:** 0.16 (function body across 24 matched files)
+- **Average documentation cosine:** 0.15 (doc text across 24 matched files)
+- **Cheat-zeroed Files:** 15
+- **Critical Issues:** 37 files with <0.60 function similarity
 
 ## Priority 1: Fix Incomplete High-Dependency Files
 
@@ -32,23 +32,23 @@ Based on AST analysis, here are the concrete next steps.
 Critical missing files (>10 dependencies):
 
 1. **har.service** (28 deps)
-   - Path: `layer/har/service.rs`
+   - Path: `rama-http/src/layer/har/service.rs`
    - Essential for 28 other files
 
 2. **response.into_response** (17 deps)
-   - Path: `service/web/endpoint/response/into_response.rs`
+   - Path: `rama-http/src/service/web/endpoint/response/into_response.rs`
    - Essential for 17 other files
 
 3. **body.bytes** (17 deps)
-   - Path: `service/web/endpoint/extract/body/bytes.rs`
+   - Path: `rama-http/src/service/web/endpoint/extract/body/bytes.rs`
    - Essential for 17 other files
 
 4. **har.layer** (13 deps)
-   - Path: `layer/har/layer.rs`
+   - Path: `rama-http/src/layer/har/layer.rs`
    - Essential for 13 other files
 
 5. **har.extensions** (10 deps)
-   - Path: `layer/har/extensions.rs`
+   - Path: `rama-http/src/layer/har/extensions.rs`
    - Essential for 10 other files
 
 ## Detailed Work Items
@@ -89,10 +89,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** `poll_frame`, `is_end_stream`, `size_hint`
 - **Types:** 0/2 matched (target 6)
 - **Missing types:** `Data`, `Error`
-- **Provenance warning:** port-lint provenance header matched only by basename: `types/body.rs` vs expected `layer/trace/body.rs`
-- **Provenance warning:** port-lint provenance header matched only by basename: `tests:types/body.rs` vs expected `layer/trace/body.rs`
-- **Proposed provenance header:** `// port-lint: source layer/trace/body.rs` (current: `// port-lint: source types/body.rs`)
-- **Proposed provenance header:** `// port-lint: tests layer/trace/body.rs` (current: `// port-lint: tests types/body.rs`)
+- **Provenance warning:** port-lint provenance header matched only by basename: `rama-http/src/types/body.rs` vs expected `layer/trace/body.rs`
+- **Provenance warning:** port-lint provenance header matched only by basename: `tests:rama-http/src/types/body.rs` vs expected `layer/trace/body.rs`
+- **Proposed provenance header:** `// port-lint: source layer/trace/body.rs` (current: `// port-lint: source rama-http/src/types/body.rs`)
+- **Proposed provenance header:** `// port-lint: tests layer/trace/body.rs` (current: `// port-lint: tests rama-http/src/types/body.rs`)
 - **Lint issues:** 2
 
 ### 4. matcher.uri
@@ -106,8 +106,8 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/2 matched
 - **Missing types:** `Engine`
 - **Tests:** 0/6 matched
-- **Provenance warning:** port-lint provenance header matched only by basename: `tests:types/uri.rs` vs expected `matcher/uri.rs`
-- **Proposed provenance header:** `// port-lint: tests matcher/uri.rs` (current: `// port-lint: tests types/uri.rs`)
+- **Provenance warning:** port-lint provenance header matched only by basename: `tests:rama-http/src/types/uri.rs` vs expected `matcher/uri.rs`
+- **Proposed provenance header:** `// port-lint: tests matcher/uri.rs` (current: `// port-lint: tests rama-http/src/types/uri.rs`)
 - **Lint issues:** 2
 
 ### 5. matcher.method
@@ -121,8 +121,8 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/3 matched (target 2)
 - **Missing types:** `NoMatchingMethodMatcher`, `Error`
 - **Tests:** 0/1 matched
-- **Provenance warning:** port-lint provenance header matched only by basename: `tests:types/method.rs` vs expected `matcher/method.rs`
-- **Proposed provenance header:** `// port-lint: tests matcher/method.rs` (current: `// port-lint: tests types/method.rs`)
+- **Provenance warning:** port-lint provenance header matched only by basename: `tests:rama-http/src/types/method.rs` vs expected `matcher/method.rs`
+- **Proposed provenance header:** `// port-lint: tests matcher/method.rs` (current: `// port-lint: tests rama-http/src/types/method.rs`)
 - **Lint issues:** 2
 
 ### 6. utils.header_value
@@ -147,8 +147,8 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/3 matched (target 2)
 - **Missing types:** `NoMatchingVersionMatcher`, `Error`
 - **Tests:** 0/3 matched
-- **Provenance warning:** port-lint provenance header matched only by basename: `types/version.rs` vs expected `matcher/version.rs`
-- **Proposed provenance header:** `// port-lint: source matcher/version.rs` (current: `// port-lint: source types/version.rs`)
+- **Provenance warning:** port-lint provenance header matched only by basename: `rama-http/src/types/version.rs` vs expected `matcher/version.rs`
+- **Proposed provenance header:** `// port-lint: source matcher/version.rs` (current: `// port-lint: source rama-http/src/types/version.rs`)
 - **Lint issues:** 2
 
 ### 8. matcher.domain
@@ -292,10 +292,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** `make_header_value`, `make_header_value_maker`, `new`, `fmt`, `call`, `apply`
 - **Types:** 0/10 matched (target 4)
 - **Missing types:** `MakeHeaderValueFactory`, `MakeHeaderValue`, `Maker`, `MakeHeaderValueDefault`, `TypedHeaderAsMaker`, `MakeHeaderValueFactoryFn`, `BoxMakeHeaderValueFactoryFn`, `MakeHeaderValueFn`, `BoxMakeHeaderValueFn`, `InsertHeaderMode`
-- **Provenance warning:** port-lint provenance header matched only by basename: `types/header.rs` vs expected `layer/set_header/response/header.rs`
-- **Provenance warning:** port-lint provenance header matched only by basename: `tests:types/header.rs` vs expected `layer/set_header/response/header.rs`
-- **Proposed provenance header:** `// port-lint: source layer/set_header/response/header.rs` (current: `// port-lint: source types/header.rs`)
-- **Proposed provenance header:** `// port-lint: tests layer/set_header/response/header.rs` (current: `// port-lint: tests types/header.rs`)
+- **Provenance warning:** port-lint provenance header matched only by basename: `rama-http/src/types/header.rs` vs expected `layer/set_header/response/header.rs`
+- **Provenance warning:** port-lint provenance header matched only by basename: `tests:rama-http/src/types/header.rs` vs expected `layer/set_header/response/header.rs`
+- **Proposed provenance header:** `// port-lint: source layer/set_header/response/header.rs` (current: `// port-lint: source rama-http/src/types/header.rs`)
+- **Proposed provenance header:** `// port-lint: tests layer/set_header/response/header.rs` (current: `// port-lint: tests rama-http/src/types/header.rs`)
 - **Lint issues:** 2
 
 ### 20. remove_header.response
@@ -309,8 +309,8 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/6 matched (target 3)
 - **Missing types:** `RemoveResponseHeaderLayer`, `RemoveResponseHeaderMode`, `Service`, `RemoveResponseHeader`, `Output`, `Error`
 - **Tests:** 0/4 matched
-- **Provenance warning:** port-lint provenance header matched only by basename: `types/response.rs` vs expected `layer/remove_header/response.rs`
-- **Proposed provenance header:** `// port-lint: source layer/remove_header/response.rs` (current: `// port-lint: source types/response.rs`)
+- **Provenance warning:** port-lint provenance header matched only by basename: `rama-http/src/types/response.rs` vs expected `layer/remove_header/response.rs`
+- **Proposed provenance header:** `// port-lint: source layer/remove_header/response.rs` (current: `// port-lint: source rama-http/src/types/response.rs`)
 - **Lint issues:** 1
 
 ### 21. remove_header.request
@@ -324,8 +324,8 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/6 matched (target 3)
 - **Missing types:** `RemoveRequestHeaderLayer`, `RemoveRequestHeaderMode`, `Service`, `RemoveRequestHeader`, `Output`, `Error`
 - **Tests:** 0/4 matched
-- **Provenance warning:** port-lint provenance header matched only by basename: `types/request.rs` vs expected `layer/remove_header/request.rs`
-- **Proposed provenance header:** `// port-lint: source layer/remove_header/request.rs` (current: `// port-lint: source types/request.rs`)
+- **Provenance warning:** port-lint provenance header matched only by basename: `rama-http/src/types/request.rs` vs expected `layer/remove_header/request.rs`
+- **Proposed provenance header:** `// port-lint: source layer/remove_header/request.rs` (current: `// port-lint: source rama-http/src/types/request.rs`)
 - **Lint issues:** 1
 
 ### 22. classify.mod
@@ -407,8 +407,8 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** `from_request`
 - **Types:** 0/1 matched (target 5)
 - **Missing types:** `Rejection`
-- **Provenance warning:** port-lint provenance header matched only by basename: `types/uri.rs` vs expected `service/web/endpoint/extract/uri.rs`
-- **Proposed provenance header:** `// port-lint: source service/web/endpoint/extract/uri.rs` (current: `// port-lint: source types/uri.rs`)
+- **Provenance warning:** port-lint provenance header matched only by basename: `rama-http/src/types/uri.rs` vs expected `service/web/endpoint/extract/uri.rs`
+- **Proposed provenance header:** `// port-lint: source service/web/endpoint/extract/uri.rs` (current: `// port-lint: source rama-http/src/types/uri.rs`)
 - **Lint issues:** 1
 
 ### 29. extract.method
@@ -421,8 +421,8 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** `from_parts_state_ref_pair`
 - **Types:** 0/1 matched
 - **Missing types:** `Rejection`
-- **Provenance warning:** port-lint provenance header matched only by basename: `types/method.rs` vs expected `service/web/endpoint/extract/method.rs`
-- **Proposed provenance header:** `// port-lint: source service/web/endpoint/extract/method.rs` (current: `// port-lint: source types/method.rs`)
+- **Provenance warning:** port-lint provenance header matched only by basename: `rama-http/src/types/method.rs` vs expected `service/web/endpoint/extract/method.rs`
+- **Proposed provenance header:** `// port-lint: source service/web/endpoint/extract/method.rs` (current: `// port-lint: source rama-http/src/types/method.rs`)
 - **Lint issues:** 1
 
 ### 30. utils.request
@@ -502,8 +502,8 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 2)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only by basename: `core/mod.rs` vs expected `layer/util/mod.rs`
-- **Proposed provenance header:** `// port-lint: source layer/util/mod.rs` (current: `// port-lint: source core/mod.rs`)
+- **Provenance warning:** port-lint provenance header matched only by basename: `rama-http/src/core/mod.rs` vs expected `layer/util/mod.rs`
+- **Proposed provenance header:** `// port-lint: source layer/util/mod.rs` (current: `// port-lint: source rama-http/src/core/mod.rs`)
 - **Lint issues:** 1
 
 ### 37. body.mod
@@ -516,10 +516,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 3)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only by basename: `tests:layer/mod.rs` vs expected `body/mod.rs`
-- **Provenance warning:** port-lint provenance header matched only by basename: `tests:service/mod.rs` vs expected `body/mod.rs`
-- **Proposed provenance header:** `// port-lint: tests body/mod.rs` (current: `// port-lint: tests layer/mod.rs`)
-- **Proposed provenance header:** `// port-lint: tests body/mod.rs` (current: `// port-lint: tests service/mod.rs`)
+- **Provenance warning:** port-lint provenance header matched only by basename: `tests:rama-http/src/layer/mod.rs` vs expected `body/mod.rs`
+- **Provenance warning:** port-lint provenance header matched only by basename: `tests:rama-http/src/service/mod.rs` vs expected `body/mod.rs`
+- **Proposed provenance header:** `// port-lint: tests body/mod.rs` (current: `// port-lint: tests rama-http/src/layer/mod.rs`)
+- **Proposed provenance header:** `// port-lint: tests body/mod.rs` (current: `// port-lint: tests rama-http/src/service/mod.rs`)
 - **Lint issues:** 2
 
 ### 38. io.mod
@@ -533,12 +533,12 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 2)
 - **Missing types:** _none_
 
-### 39. lib
+### 39. rama-http.lib
 
-- **Target:** `ramahttp.Lib`
-- **Similarity:** 1.00
+- **Target:** `ramahttp.Lib [STUB]`
+- **Similarity:** 0.00
 - **Dependents:** 0
-- **Priority Score:** 0.0
+- **Priority Score:** 10.0
 - **Functions:** 0/0 matched
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 21)
@@ -552,48 +552,4 @@ For each file to be considered "complete":
 - All tests ported
 - Documentation ported
 - port-lint header present
-
-## Reexport / Wiring Modules
-
-These files match `reexport_modules` patterns in `.ast_distance_config.json`. They are filtered out of
-normal priority and missing-file ladders because they are wiring
-modules, not direct logic ports. Consult them for call-site routing;
-do not treat them as the next implementation target by default.
-
-### Missing
-
-| Source | Expected target | Deps | Source path | Expected path |
-|--------|-----------------|------|-------------|---------------|
-| `compression.mod` | `layer.compression.Mod` | 0 | `layer/compression/mod.rs` | `layer/compression/Mod.kt` |
-| `stream.mod` | `layer.compression.stream.Mod` | 0 | `layer/compression/stream/mod.rs` | `layer/compression/stream/Mod.kt` |
-| `decompression.mod` | `layer.decompression.Mod` | 0 | `layer/decompression/mod.rs` | `layer/decompression/Mod.kt` |
-| `layer.decompression.request.mod` | `layer.decompression.request.Mod` | 0 | `layer/decompression/request/mod.rs` | `layer/decompression/request/Mod.kt` |
-| `dns_resolve.mod` | `layer.dns.dnsresolve.Mod` | 0 | `layer/dns/dns_resolve/mod.rs` | `layer/dns/dnsresolve/Mod.kt` |
-| `dns.mod` | `layer.dns.Mod` | 0 | `layer/dns/mod.rs` | `layer/dns/Mod.kt` |
-| `follow_redirect.mod` | `layer.followredirect.Mod` | 0 | `layer/follow_redirect/mod.rs` | `layer/followredirect/Mod.kt` |
-| `policy.mod` | `layer.followredirect.policy.Mod` | 0 | `layer/follow_redirect/policy/mod.rs` | `layer/followredirect/policy/Mod.kt` |
-| `forwarded.mod` | `layer.forwarded.Mod` | 0 | `layer/forwarded/mod.rs` | `layer/forwarded/Mod.kt` |
-| `har.mod` | `layer.har.Mod` | 0 | `layer/har/mod.rs` | `layer/har/Mod.kt` |
-| `recorder.mod` | `layer.har.recorder.Mod` | 0 | `layer/har/recorder/mod.rs` | `layer/har/recorder/Mod.kt` |
-| `match_redirect.mod` | `layer.matchredirect.Mod` | 0 | `layer/match_redirect/mod.rs` | `layer/matchredirect/Mod.kt` |
-| `layer.mod` | `layer.Mod` | 0 | `layer/mod.rs` | `layer/Mod.kt` |
-| `required_header.mod` | `layer.requiredheader.Mod` | 0 | `layer/required_header/mod.rs` | `layer/requiredheader/Mod.kt` |
-| `rewrite_uri.mod` | `layer.rewriteuri.Mod` | 0 | `layer/rewrite_uri/mod.rs` | `layer/rewriteuri/Mod.kt` |
-| `request.mod` | `layer.setheader.request.Mod` | 0 | `layer/set_header/request/mod.rs` | `layer/setheader/request/Mod.kt` |
-| `response.mod` | `layer.setheader.response.Mod` | 0 | `layer/set_header/response/mod.rs` | `layer/setheader/response/Mod.kt` |
-| `timeout.mod` | `layer.timeout.Mod` | 0 | `layer/timeout/mod.rs` | `layer/timeout/Mod.kt` |
-| `trace.mod` | `layer.trace.Mod` | 0 | `layer/trace/mod.rs` | `layer/trace/Mod.kt` |
-| `traffic_writer.mod` | `layer.trafficwriter.Mod` | 0 | `layer/traffic_writer/mod.rs` | `layer/trafficwriter/Mod.kt` |
-| `validate_request.mod` | `layer.validaterequest.Mod` | 0 | `layer/validate_request/mod.rs` | `layer/validaterequest/Mod.kt` |
-| `version_adapter.mod` | `layer.versionadapter.Mod` | 0 | `layer/version_adapter/mod.rs` | `layer/versionadapter/Mod.kt` |
-| `client.mod` | `service.client.Mod` | 0 | `service/client/mod.rs` | `service/client/Mod.kt` |
-| `fs.mod` | `service.fs.Mod` | 0 | `service/fs/mod.rs` | `service/fs/Mod.kt` |
-| `serve_dir.mod` | `service.fs.servedir.Mod` | 0 | `service/fs/serve_dir/mod.rs` | `service/fs/servedir/Mod.kt` |
-| `service.mod` | `service.Mod` | 0 | `service/mod.rs` | `service/Mod.kt` |
-| `service.web.endpoint.extract.body.mod` | `service.web.endpoint.extract.body.Mod` | 0 | `service/web/endpoint/extract/body/mod.rs` | `service/web/endpoint/extract/body/Mod.kt` |
-| `extract.mod` | `service.web.endpoint.extract.Mod` | 0 | `service/web/endpoint/extract/mod.rs` | `service/web/endpoint/extract/Mod.kt` |
-| `endpoint.mod` | `service.web.endpoint.Mod` | 0 | `service/web/endpoint/mod.rs` | `service/web/endpoint/Mod.kt` |
-| `service.web.endpoint.response.mod` | `service.web.endpoint.response.Mod` | 0 | `service/web/endpoint/response/mod.rs` | `service/web/endpoint/response/Mod.kt` |
-| `macros.mod` | `utils.macros.Mod` | 0 | `utils/macros/mod.rs` | `utils/macros/Mod.kt` |
-| `utils.mod` | `utils.Mod` | 0 | `utils/mod.rs` | `utils/Mod.kt` |
 

@@ -1,4 +1,4 @@
-// port-lint: tests io/mod.rs
+// port-lint: tests rama-http/src/io/mod.rs
 package io.github.kotlinmania.ramahttp.io
 
 import io.github.kotlinmania.ramahttp.types.Body

@@ -1,4 +1,4 @@
-// port-lint: source lib.rs
+// port-lint: source rama-http/src/lib.rs
 package io.github.kotlinmania.ramahttp
 
 public typealias Method = io.github.kotlinmania.ramahttp.types.Method

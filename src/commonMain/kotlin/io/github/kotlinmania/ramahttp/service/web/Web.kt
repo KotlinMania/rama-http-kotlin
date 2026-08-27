@@ -1,4 +1,4 @@
-// port-lint: source service/web/mod.rs
+// port-lint: source rama-http/src/service/web/mod.rs
 package io.github.kotlinmania.ramahttp.service.web
 
 import io.github.kotlinmania.ramahttp.core.HttpService

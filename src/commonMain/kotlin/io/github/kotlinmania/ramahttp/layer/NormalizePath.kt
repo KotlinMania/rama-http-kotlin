@@ -1,4 +1,4 @@
-// port-lint: source layer/normalize_path.rs
+// port-lint: source rama-http/src/layer/normalize_path.rs
 package io.github.kotlinmania.ramahttp.layer
 
 import io.github.kotlinmania.ramahttp.core.HttpLayer
