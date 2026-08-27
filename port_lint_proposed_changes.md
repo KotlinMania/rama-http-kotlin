@@ -2,8 +2,23 @@
 
 **Generated:** 2026-08-27
 **Source:** tmp/rama-http/src
-**Target:** src/commonMain/kotlin/io/github/kotlinmania/rama/http
+**Target:** src/commonMain/kotlin
 
 These are review proposals only. They are emitted when a Rust -> Kotlin pair matches only after fallback normalization, so the existing `port-lint` header is not an exact provenance match.
 
-_No fallback provenance matches detected._
+| Target file | Current header | Proposed header | Source path | Reason |
+|-------------|----------------|-----------------|-------------|--------|
+| `src/commonMain/kotlin/io/github/kotlinmania/ramahttp/types/Body.kt` | `// port-lint: source types/body.rs` | `// port-lint: source layer/trace/body.rs` | `layer/trace/body.rs` | `port-lint provenance header matched only by basename: 'types/body.rs' vs expected 'layer/trace/body.rs'` |
+| `src/commonTest/kotlin/io/github/kotlinmania/ramahttp/types/BodyTest.kt` | `// port-lint: tests types/body.rs` | `// port-lint: tests layer/trace/body.rs` | `layer/trace/body.rs` | `port-lint provenance header matched only by basename: 'tests:types/body.rs' vs expected 'layer/trace/body.rs'` |
+| `src/commonTest/kotlin/io/github/kotlinmania/ramahttp/types/UriTest.kt` | `// port-lint: tests types/uri.rs` | `// port-lint: tests matcher/uri.rs` | `matcher/uri.rs` | `port-lint provenance header matched only by basename: 'tests:types/uri.rs' vs expected 'matcher/uri.rs'` |
+| `src/commonTest/kotlin/io/github/kotlinmania/ramahttp/types/MethodTest.kt` | `// port-lint: tests types/method.rs` | `// port-lint: tests matcher/method.rs` | `matcher/method.rs` | `port-lint provenance header matched only by basename: 'tests:types/method.rs' vs expected 'matcher/method.rs'` |
+| `src/commonMain/kotlin/io/github/kotlinmania/ramahttp/types/Version.kt` | `// port-lint: source types/version.rs` | `// port-lint: source matcher/version.rs` | `matcher/version.rs` | `port-lint provenance header matched only by basename: 'types/version.rs' vs expected 'matcher/version.rs'` |
+| `src/commonMain/kotlin/io/github/kotlinmania/ramahttp/types/Header.kt` | `// port-lint: source types/header.rs` | `// port-lint: source layer/set_header/response/header.rs` | `layer/set_header/response/header.rs` | `port-lint provenance header matched only by basename: 'types/header.rs' vs expected 'layer/set_header/response/header.rs'` |
+| `src/commonTest/kotlin/io/github/kotlinmania/ramahttp/types/HeaderTest.kt` | `// port-lint: tests types/header.rs` | `// port-lint: tests layer/set_header/response/header.rs` | `layer/set_header/response/header.rs` | `port-lint provenance header matched only by basename: 'tests:types/header.rs' vs expected 'layer/set_header/response/header.rs'` |
+| `src/commonMain/kotlin/io/github/kotlinmania/ramahttp/types/Response.kt` | `// port-lint: source types/response.rs` | `// port-lint: source layer/remove_header/response.rs` | `layer/remove_header/response.rs` | `port-lint provenance header matched only by basename: 'types/response.rs' vs expected 'layer/remove_header/response.rs'` |
+| `src/commonMain/kotlin/io/github/kotlinmania/ramahttp/types/Request.kt` | `// port-lint: source types/request.rs` | `// port-lint: source layer/remove_header/request.rs` | `layer/remove_header/request.rs` | `port-lint provenance header matched only by basename: 'types/request.rs' vs expected 'layer/remove_header/request.rs'` |
+| `src/commonMain/kotlin/io/github/kotlinmania/ramahttp/types/Uri.kt` | `// port-lint: source types/uri.rs` | `// port-lint: source service/web/endpoint/extract/uri.rs` | `service/web/endpoint/extract/uri.rs` | `port-lint provenance header matched only by basename: 'types/uri.rs' vs expected 'service/web/endpoint/extract/uri.rs'` |
+| `src/commonMain/kotlin/io/github/kotlinmania/ramahttp/types/Method.kt` | `// port-lint: source types/method.rs` | `// port-lint: source service/web/endpoint/extract/method.rs` | `service/web/endpoint/extract/method.rs` | `port-lint provenance header matched only by basename: 'types/method.rs' vs expected 'service/web/endpoint/extract/method.rs'` |
+| `src/commonMain/kotlin/io/github/kotlinmania/ramahttp/core/Core.kt` | `// port-lint: source core/mod.rs` | `// port-lint: source layer/util/mod.rs` | `layer/util/mod.rs` | `port-lint provenance header matched only by basename: 'core/mod.rs' vs expected 'layer/util/mod.rs'` |
+| `src/commonTest/kotlin/io/github/kotlinmania/ramahttp/layer/LayerTest.kt` | `// port-lint: tests layer/mod.rs` | `// port-lint: tests body/mod.rs` | `body/mod.rs` | `port-lint provenance header matched only by basename: 'tests:layer/mod.rs' vs expected 'body/mod.rs'` |
+| `src/commonTest/kotlin/io/github/kotlinmania/ramahttp/service/ServiceTest.kt` | `// port-lint: tests service/mod.rs` | `// port-lint: tests body/mod.rs` | `body/mod.rs` | `port-lint provenance header matched only by basename: 'tests:service/mod.rs' vs expected 'body/mod.rs'` |
