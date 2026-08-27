@@ -1,4 +1,4 @@
-// port-lint: source layer/retry/mod.rs
+// port-lint: source rama-http/src/layer/retry/mod.rs
 package io.github.kotlinmania.ramahttp.layer
 
 import io.github.kotlinmania.ramahttp.core.HttpLayer

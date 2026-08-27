@@ -1,4 +1,4 @@
-// port-lint: source convert/curl.rs
+// port-lint: source rama-http/src/convert/curl.rs
 package io.github.kotlinmania.ramahttp.convert
 
 import io.github.kotlinmania.ramahttp.types.HeaderName

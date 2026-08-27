@@ -1,4 +1,4 @@
-// port-lint: source io/request.rs
+// port-lint: source rama-http/src/io/request.rs
 package io.github.kotlinmania.ramahttp.io
 
 import io.github.kotlinmania.ramahttp.types.Request
