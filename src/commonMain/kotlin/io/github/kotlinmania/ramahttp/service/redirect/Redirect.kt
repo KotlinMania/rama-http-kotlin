@@ -1,4 +1,4 @@
-// port-lint: source rama-http/src/service/redirect/mod.rs
+// port-lint: source service/redirect/mod.rs
 package io.github.kotlinmania.ramahttp.service.redirect
 
 import io.github.kotlinmania.ramahttp.core.Service

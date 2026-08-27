@@ -1,4 +1,4 @@
-// port-lint: source rama-http/src/layer/cors/mod.rs
+// port-lint: source layer/cors/mod.rs
 package io.github.kotlinmania.ramahttp.layer
 
 import io.github.kotlinmania.ramahttp.core.HttpLayer

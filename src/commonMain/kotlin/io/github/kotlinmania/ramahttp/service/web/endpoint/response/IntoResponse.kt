@@ -1,4 +1,4 @@
-// port-lint: source rama-http/src/service/web/endpoint/response/into_response_parts.rs
+// port-lint: source service/web/endpoint/response/into_response_parts.rs
 package io.github.kotlinmania.ramahttp.service.web.endpoint.response
 
 import io.github.kotlinmania.ramahttp.types.Body

@@ -1,4 +1,4 @@
-// port-lint: source rama-http/src/body/mod.rs
+// port-lint: source body/mod.rs
 package io.github.kotlinmania.ramahttp.body
 
 /**

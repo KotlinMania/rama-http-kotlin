@@ -1,4 +1,4 @@
-// port-lint: source rama-http/src/body/zip_bomb.rs
+// port-lint: source body/zip_bomb.rs
 package io.github.kotlinmania.ramahttp.body
 
 import io.github.kotlinmania.ramahttp.types.Body

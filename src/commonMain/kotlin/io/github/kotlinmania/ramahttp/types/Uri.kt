@@ -1,4 +1,4 @@
-// port-lint: source rama-http/src/types/uri.rs
+// port-lint: source types/uri.rs
 package io.github.kotlinmania.ramahttp.types
 
 public class Scheme(
