@@ -1,4 +1,4 @@
-// port-lint: tests rama-http/src/body/zip_bomb.rs
+// port-lint: tests body/zip_bomb.rs
 package io.github.kotlinmania.ramahttp.body
 
 import io.github.kotlinmania.ramahttp.types.HeaderName

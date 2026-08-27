@@ -1,4 +1,4 @@
-// port-lint: source rama-http/src/types/error.rs
+// port-lint: source types/error.rs
 package io.github.kotlinmania.ramahttp.types
 
 public open class HttpError(

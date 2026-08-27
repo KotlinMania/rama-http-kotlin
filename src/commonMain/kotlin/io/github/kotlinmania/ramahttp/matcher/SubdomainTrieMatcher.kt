@@ -1,4 +1,4 @@
-// port-lint: source rama-http/src/matcher/subdomain_trie.rs
+// port-lint: source matcher/subdomain_trie.rs
 package io.github.kotlinmania.ramahttp.matcher
 
 import io.github.kotlinmania.ramahttp.core.Extensions
