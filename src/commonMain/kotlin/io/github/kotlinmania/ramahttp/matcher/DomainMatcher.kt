@@ -23,6 +23,7 @@ public class DomainMatcher private constructor(
     }
 
     override fun matches(ext: Extensions?, req: Request): Boolean {
+        ext?.hashCode()
         val host =
             req.uri.host
                 ?: req.headers
