@@ -1,4 +1,4 @@
-// port-lint: tests types/body.rs
+// port-lint: tests rama-http/src/lib.rs
 package io.github.kotlinmania.ramahttp.types
 
 import kotlinx.coroutines.flow.flowOf

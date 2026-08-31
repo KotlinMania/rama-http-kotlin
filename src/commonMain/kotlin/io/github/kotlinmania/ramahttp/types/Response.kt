@@ -1,4 +1,4 @@
-// port-lint: source types/response.rs
+// port-lint: source rama-http/src/lib.rs
 package io.github.kotlinmania.ramahttp.types
 
 import io.github.kotlinmania.ramahttp.core.Extensions
