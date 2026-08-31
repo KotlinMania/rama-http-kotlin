@@ -24,6 +24,7 @@ public class HeaderMatcher private constructor(
     }
 
     override fun matches(ext: Extensions?, req: Request): Boolean {
+        ext?.hashCode()
         val headers = req.headers
         return when (val k = kind) {
             is Kind.Exists -> headers.containsKey(name)

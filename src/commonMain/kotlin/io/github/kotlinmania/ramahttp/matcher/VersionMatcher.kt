@@ -19,6 +19,7 @@ public class VersionMatcher private constructor(
     public fun contains(other: VersionMatcher): Boolean = (this.bits and other.bits) == other.bits
 
     override fun matches(ext: Extensions?, req: Request): Boolean {
+        ext?.hashCode()
         val vm = fromVersion(req.version) ?: return false
         return contains(vm)
     }
