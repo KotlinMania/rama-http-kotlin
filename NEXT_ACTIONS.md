@@ -5,12 +5,12 @@ Based on AST analysis, here are the concrete next steps.
 ## Summary
 
 - **Files Present:** 29/205 (14.1%)
-- **Function parity:** 78/1997 matched (target 377) — 3.9%
-- **Class/type parity:** 26/646 matched (target 132) — 4.0%
-- **Combined symbol parity:** 104/2643 matched (target 509) — 3.9%
+- **Function parity:** 78/1948 matched (target 220) — 4.0%
+- **Class/type parity:** 26/618 matched (target 88) — 4.2%
+- **Combined symbol parity:** 104/2566 matched (target 308) — 4.1%
 - **Average inline-code cosine:** 0.22 (function body across 15 matched files)
 - **Average documentation cosine:** 0.14 (doc text across 15 matched files)
-- **Cheat-zeroed Files:** 14
+- **Cheat-zeroed Files:** 13
 - **Critical Issues:** 27 files with <0.60 function similarity
 
 ## Priority 1: Fix Incomplete High-Dependency Files
@@ -22,27 +22,27 @@ No incomplete high-dependency files detected.
 Critical missing files (>10 dependencies):
 
 1. **har.service** (28 deps)
-   - Path: `layer/har/service.rs`
+   - Path: `rama-http/src/layer/har/service.rs`
    - Essential for 28 other files
 
 2. **io.request** (22 deps)
-   - Path: `io/request.rs`
+   - Path: `rama-http/src/io/request.rs`
    - Essential for 22 other files
 
 3. **response.into_response** (17 deps)
-   - Path: `service/web/endpoint/response/into_response.rs`
+   - Path: `rama-http/src/service/web/endpoint/response/into_response.rs`
    - Essential for 17 other files
 
 4. **body.bytes** (17 deps)
-   - Path: `service/web/endpoint/extract/body/bytes.rs`
+   - Path: `rama-http/src/service/web/endpoint/extract/body/bytes.rs`
    - Essential for 17 other files
 
 5. **har.layer** (13 deps)
-   - Path: `layer/har/layer.rs`
+   - Path: `rama-http/src/layer/har/layer.rs`
    - Essential for 13 other files
 
 6. **har.extensions** (10 deps)
-   - Path: `layer/har/extensions.rs`
+   - Path: `rama-http/src/layer/har/extensions.rs`
    - Essential for 10 other files
 
 ## Detailed Work Items
@@ -51,7 +51,7 @@ Every matched file is listed below with function and type symbol parity.
 
 ### 1. matcher.uri
 
-- **Target:** `matcher.UriMatcher [PROVENANCE-FALLBACK]`
+- **Target:** `matcher.UriMatcher`
 - **Similarity:** 0.11
 - **Dependents:** 6
 - **Priority Score:** 6101509.0
@@ -60,13 +60,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/2 matched (target 1)
 - **Missing types:** `Engine`
 - **Tests:** 0/6 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/matcher/uri.rs` vs expected `matcher/uri.rs`
-- **Proposed provenance header:** `// port-lint: source matcher/uri.rs` (current: `// port-lint: source rama-http/src/matcher/uri.rs`)
-- **Lint issues:** 1
 
 ### 2. matcher.method
 
-- **Target:** `matcher.MethodMatcher [PROVENANCE-FALLBACK]`
+- **Target:** `matcher.MethodMatcher`
 - **Similarity:** 0.32
 - **Dependents:** 5
 - **Priority Score:** 5071207.0
@@ -75,13 +72,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/3 matched (target 1)
 - **Missing types:** `NoMatchingMethodMatcher`, `Error`
 - **Tests:** 0/1 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/matcher/method.rs` vs expected `matcher/method.rs`
-- **Proposed provenance header:** `// port-lint: source matcher/method.rs` (current: `// port-lint: source rama-http/src/matcher/method.rs`)
-- **Lint issues:** 1
 
 ### 3. utils.header_value
 
-- **Target:** `utils.HeaderValue [PROVENANCE-FALLBACK]`
+- **Target:** `utils.HeaderValue`
 - **Similarity:** 0.79
 - **Dependents:** 5
 - **Priority Score:** 5010502.0
@@ -89,13 +83,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** `fmt`
 - **Types:** 2/2 matched (target 4)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/utils/header_value.rs` vs expected `utils/header_value.rs`
-- **Proposed provenance header:** `// port-lint: source utils/header_value.rs` (current: `// port-lint: source rama-http/src/utils/header_value.rs`)
-- **Lint issues:** 1
 
 ### 4. matcher.version
 
-- **Target:** `matcher.VersionMatcher [PROVENANCE-FALLBACK]`
+- **Target:** `matcher.VersionMatcher`
 - **Similarity:** 0.26
 - **Dependents:** 2
 - **Priority Score:** 2091407.4
@@ -104,13 +95,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/3 matched (target 1)
 - **Missing types:** `NoMatchingVersionMatcher`, `Error`
 - **Tests:** 0/3 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/matcher/version.rs` vs expected `matcher/version.rs`
-- **Proposed provenance header:** `// port-lint: source matcher/version.rs` (current: `// port-lint: source rama-http/src/matcher/version.rs`)
-- **Lint issues:** 1
 
 ### 5. matcher.domain
 
-- **Target:** `matcher.DomainMatcher [PROVENANCE-FALLBACK]`
+- **Target:** `matcher.DomainMatcher`
 - **Similarity:** 0.66
 - **Dependents:** 2
 - **Priority Score:** 2000403.4
@@ -118,13 +106,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 1/1 matched
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/matcher/domain.rs` vs expected `matcher/domain.rs`
-- **Proposed provenance header:** `// port-lint: source matcher/domain.rs` (current: `// port-lint: source rama-http/src/matcher/domain.rs`)
-- **Lint issues:** 1
 
 ### 6. io.upgrade
 
-- **Target:** `io.Upgrade [PROVENANCE-FALLBACK]`
+- **Target:** `io.Upgrade`
 - **Similarity:** 0.00
 - **Dependents:** 1
 - **Priority Score:** 1272710.0
@@ -133,13 +118,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/7 matched (target 1)
 - **Missing types:** `Upgraded`, `OnUpgrade`, `Parts`, `Pending`, `Io`, `Output`, `HandleUpgrade`
 - **Tests:** 0/1 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/io/upgrade.rs` vs expected `io/upgrade.rs`
-- **Proposed provenance header:** `// port-lint: source io/upgrade.rs` (current: `// port-lint: source rama-http/src/io/upgrade.rs`)
-- **Lint issues:** 1
 
 ### 7. body.zip_bomb
 
-- **Target:** `body.ZipBomb [PROVENANCE-FALLBACK]`
+- **Target:** `body.ZipBomb`
 - **Similarity:** 0.10
 - **Dependents:** 1
 - **Priority Score:** 1131809.0
@@ -147,15 +129,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** `default`, `new`, `into_generate_body`, `into_generate_response`, `from`, `fmt`, `write_nested_zip_file`, `write_fake_binary_data`, `generate_recursive_base_zip`, `read`, `poll_next`
 - **Types:** 1/3 matched
 - **Missing types:** `ZeroReader`, `Item`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/body/zip_bomb.rs` vs expected `body/zip_bomb.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:rama-http/src/body/zip_bomb.rs` vs expected `body/zip_bomb.rs`
-- **Proposed provenance header:** `// port-lint: source body/zip_bomb.rs` (current: `// port-lint: source rama-http/src/body/zip_bomb.rs`)
-- **Proposed provenance header:** `// port-lint: tests body/zip_bomb.rs` (current: `// port-lint: tests rama-http/src/body/zip_bomb.rs`)
-- **Lint issues:** 2
 
 ### 8. matcher.header
 
-- **Target:** `matcher.HeaderMatcher [PROVENANCE-FALLBACK]`
+- **Target:** `matcher.HeaderMatcher`
 - **Similarity:** 0.21
 - **Dependents:** 1
 - **Priority Score:** 1101407.9
@@ -164,13 +141,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/2 matched (target 5)
 - **Missing types:** `HeaderMatcherKind`
 - **Tests:** 0/8 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/matcher/header.rs` vs expected `matcher/header.rs`
-- **Proposed provenance header:** `// port-lint: source matcher/header.rs` (current: `// port-lint: source rama-http/src/matcher/header.rs`)
-- **Lint issues:** 1
 
 ### 9. layer.set_status
 
-- **Target:** `layer.SetStatus [PROVENANCE-FALLBACK]`
+- **Target:** `layer.SetStatus`
 - **Similarity:** 0.48
 - **Dependents:** 1
 - **Priority Score:** 1040905.2
@@ -178,15 +152,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** `new`
 - **Types:** 2/5 matched (target 3)
 - **Missing types:** `Service`, `Output`, `Error`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/layer/set_status.rs` vs expected `layer/set_status.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:rama-http/src/layer/set_status.rs` vs expected `layer/set_status.rs`
-- **Proposed provenance header:** `// port-lint: source layer/set_status.rs` (current: `// port-lint: source rama-http/src/layer/set_status.rs`)
-- **Proposed provenance header:** `// port-lint: tests layer/set_status.rs` (current: `// port-lint: tests rama-http/src/layer/set_status.rs`)
-- **Lint issues:** 2
 
 ### 10. matcher.mod
 
-- **Target:** `matcher.HttpMatcher [STUB] [PROVENANCE-FALLBACK]`
+- **Target:** `matcher.HttpMatcher [STUB]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 669310.0
@@ -195,15 +164,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/3 matched (target 13)
 - **Missing types:** `HttpMatcherKind`, `BooleanMatcher`
 - **Tests:** 0/7 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/matcher/mod.rs` vs expected `matcher/mod.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:rama-http/src/matcher/mod.rs` vs expected `matcher/mod.rs`
-- **Proposed provenance header:** `// port-lint: source matcher/mod.rs` (current: `// port-lint: source rama-http/src/matcher/mod.rs`)
-- **Proposed provenance header:** `// port-lint: tests matcher/mod.rs` (current: `// port-lint: tests rama-http/src/matcher/mod.rs`)
-- **Lint issues:** 2
 
 ### 11. layer.normalize_path
 
-- **Target:** `layer.NormalizePath [PROVENANCE-FALLBACK]`
+- **Target:** `layer.NormalizePath`
 - **Similarity:** 0.08
 - **Dependents:** 0
 - **Priority Score:** 263309.2
@@ -212,13 +176,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 3/6 matched (target 3)
 - **Missing types:** `Service`, `Output`, `Error`
 - **Tests:** 0/21 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/layer/normalize_path.rs` vs expected `layer/normalize_path.rs`
-- **Proposed provenance header:** `// port-lint: source layer/normalize_path.rs` (current: `// port-lint: source rama-http/src/layer/normalize_path.rs`)
-- **Lint issues:** 1
 
 ### 12. path.mod
 
-- **Target:** `matcher.PathMatcher [STUB] [PROVENANCE-FALLBACK]`
+- **Target:** `matcher.PathMatcher [STUB]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 223410.0
@@ -227,13 +188,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 3/8 matched (target 9)
 - **Missing types:** `UriParamsDeserializeError`, `PathMatcherKind`, `PathMatch`, `TestCase`, `Person`
 - **Tests:** 0/6 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/matcher/path/mod.rs` vs expected `matcher/path/mod.rs`
-- **Proposed provenance header:** `// port-lint: source matcher/path/mod.rs` (current: `// port-lint: source rama-http/src/matcher/path/mod.rs`)
-- **Lint issues:** 1
 
 ### 13. layer.request_id
 
-- **Target:** `layer.RequestId [PROVENANCE-FALLBACK]`
+- **Target:** `layer.RequestId`
 - **Similarity:** 0.09
 - **Dependents:** 0
 - **Priority Score:** 222909.1
@@ -242,13 +200,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 5/12 matched (target 5)
 - **Missing types:** `MakeRequestId`, `Service`, `Output`, `Error`, `MakeRequestUuid`, `MakeRequestNanoid`, `Counter`
 - **Tests:** 0/6 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/layer/request_id.rs` vs expected `layer/request_id.rs`
-- **Proposed provenance header:** `// port-lint: source layer/request_id.rs` (current: `// port-lint: source rama-http/src/layer/request_id.rs`)
-- **Lint issues:** 1
 
 ### 14. convert.curl
 
-- **Target:** `convert.Curl [PROVENANCE-FALLBACK]`
+- **Target:** `convert.Curl`
 - **Similarity:** 0.02
 - **Dependents:** 0
 - **Priority Score:** 181909.8
@@ -257,15 +212,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/2 matched (target 1)
 - **Missing types:** `CurlCommandWriter`, `TestCase`
 - **Tests:** 0/8 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/convert/curl.rs` vs expected `convert/curl.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:rama-http/src/convert/curl.rs` vs expected `convert/curl.rs`
-- **Proposed provenance header:** `// port-lint: source convert/curl.rs` (current: `// port-lint: source rama-http/src/convert/curl.rs`)
-- **Proposed provenance header:** `// port-lint: tests convert/curl.rs` (current: `// port-lint: tests rama-http/src/convert/curl.rs`)
-- **Lint issues:** 2
 
 ### 15. retry.mod
 
-- **Target:** `layer.Retry [STUB] [PROVENANCE-FALLBACK]`
+- **Target:** `layer.Retry [STUB]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 161710.0
@@ -274,13 +224,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/6 matched (target 2)
 - **Missing types:** `Retry`, `RetryError`, `RetryErrorKind`, `Output`, `Error`, `State`
 - **Tests:** 0/7 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/layer/retry/mod.rs` vs expected `layer/retry/mod.rs`
-- **Proposed provenance header:** `// port-lint: source layer/retry/mod.rs` (current: `// port-lint: source rama-http/src/layer/retry/mod.rs`)
-- **Lint issues:** 1
 
 ### 16. classify.mod
 
-- **Target:** `layer.Classify [STUB] [PROVENANCE-FALLBACK]`
+- **Target:** `layer.Classify [STUB]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 151710.0
@@ -288,13 +235,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** `new`, `make_classifier`, `map_failure_class`, `classify_eos`, `classify_error`, `fmt`, `classify_response`
 - **Types:** 2/10 matched (target 4)
 - **Missing types:** `MakeClassifier`, `SharedClassifier`, `FailureClass`, `ClassifyEos`, `Classifier`, `ClassifyResponse`, `NeverClassifyEos`, `ServerErrorsFailureClass`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/layer/classify/mod.rs` vs expected `layer/classify/mod.rs`
-- **Proposed provenance header:** `// port-lint: source layer/classify/mod.rs` (current: `// port-lint: source rama-http/src/layer/classify/mod.rs`)
-- **Lint issues:** 1
 
 ### 17. layer.sensitive_headers
 
-- **Target:** `layer.SensitiveHeaders [PROVENANCE-FALLBACK]`
+- **Target:** `layer.SensitiveHeaders`
 - **Similarity:** 0.05
 - **Dependents:** 0
 - **Priority Score:** 141609.5
@@ -303,13 +247,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/9 matched (target 3)
 - **Missing types:** `SetSensitiveHeadersLayer`, `Service`, `SetSensitiveHeaders`, `SetSensitiveRequestHeadersLayer`, `SetSensitiveRequestHeaders`, `Output`, `Error`, `SetSensitiveResponseHeadersLayer`, `SetSensitiveResponseHeaders`
 - **Tests:** 0/2 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/layer/sensitive_headers.rs` vs expected `layer/sensitive_headers.rs`
-- **Proposed provenance header:** `// port-lint: source layer/sensitive_headers.rs` (current: `// port-lint: source rama-http/src/layer/sensitive_headers.rs`)
-- **Lint issues:** 1
 
 ### 18. response.into_response_parts
 
-- **Target:** `response.IntoResponse [PROVENANCE-FALLBACK]`
+- **Target:** `response.IntoResponse`
 - **Similarity:** 0.02
 - **Dependents:** 0
 - **Priority Score:** 141509.8
@@ -317,13 +258,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** `into_response_parts`, `headers`, `headers_mut`, `extensions`, `extensions_mut`, `fmt`, `key`, `value`, `source`
 - **Types:** 0/5 matched (target 3)
 - **Missing types:** `IntoResponseParts`, `Error`, `ResponseParts`, `TryIntoHeaderError`, `TryIntoHeaderErrorKind`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/service/web/endpoint/response/into_response_parts.rs` vs expected `service/web/endpoint/response/into_response_parts.rs`
-- **Proposed provenance header:** `// port-lint: source service/web/endpoint/response/into_response_parts.rs` (current: `// port-lint: source rama-http/src/service/web/endpoint/response/into_response_parts.rs`)
-- **Lint issues:** 1
 
 ### 19. cors.mod
 
-- **Target:** `layer.Cors [STUB] [PROVENANCE-FALLBACK]`
+- **Target:** `layer.Cors [STUB]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 101410.0
@@ -331,13 +269,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** `new`, `very_permissive`, `is_allow_credentials_any`, `handle_options_request`, `default`, `into_layer`
 - **Types:** 1/5 matched (target 2)
 - **Missing types:** `Service`, `Cors`, `Output`, `Error`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/layer/cors/mod.rs` vs expected `layer/cors/mod.rs`
-- **Proposed provenance header:** `// port-lint: source layer/cors/mod.rs` (current: `// port-lint: source rama-http/src/layer/cors/mod.rs`)
-- **Lint issues:** 1
 
 ### 20. matcher.subdomain_trie
 
-- **Target:** `matcher.SubdomainTrieMatcher [PROVENANCE-FALLBACK]`
+- **Target:** `matcher.SubdomainTrieMatcher`
 - **Similarity:** 0.13
 - **Dependents:** 0
 - **Priority Score:** 50808.7
@@ -346,13 +281,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/1 matched (target 2)
 - **Missing types:** _none_
 - **Tests:** 0/3 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/matcher/subdomain_trie.rs` vs expected `matcher/subdomain_trie.rs`
-- **Proposed provenance header:** `// port-lint: source matcher/subdomain_trie.rs` (current: `// port-lint: source rama-http/src/matcher/subdomain_trie.rs`)
-- **Lint issues:** 1
 
 ### 21. remove_header.mod
 
-- **Target:** `layer.RemoveHeader [STUB] [PROVENANCE-FALLBACK]`
+- **Target:** `layer.RemoveHeader [STUB]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 40410.0
@@ -360,13 +292,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** `remove_headers_by_prefix`, `remove_headers_by_exact_name`, `remove_hop_by_hop_request_headers`, `remove_hop_by_hop_response_headers`
 - **Types:** 0/0 matched (target 4)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/layer/remove_header/mod.rs` vs expected `layer/remove_header/mod.rs`
-- **Proposed provenance header:** `// port-lint: source layer/remove_header/mod.rs` (current: `// port-lint: source rama-http/src/layer/remove_header/mod.rs`)
-- **Lint issues:** 1
 
 ### 22. web.mod
 
-- **Target:** `web.Web [STUB] [PROVENANCE-FALLBACK]`
+- **Target:** `web.Web [STUB]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10.0
@@ -374,15 +303,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 3)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/service/web/mod.rs` vs expected `service/web/mod.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:rama-http/src/service/web/mod.rs` vs expected `service/web/mod.rs`
-- **Proposed provenance header:** `// port-lint: source service/web/mod.rs` (current: `// port-lint: source rama-http/src/service/web/mod.rs`)
-- **Proposed provenance header:** `// port-lint: tests service/web/mod.rs` (current: `// port-lint: tests rama-http/src/service/web/mod.rs`)
-- **Lint issues:** 2
 
 ### 23. set_header.mod
 
-- **Target:** `layer.SetHeader [STUB] [PROVENANCE-FALLBACK]`
+- **Target:** `layer.SetHeader [STUB]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10.0
@@ -390,13 +314,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 4)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/layer/set_header/mod.rs` vs expected `layer/set_header/mod.rs`
-- **Proposed provenance header:** `// port-lint: source layer/set_header/mod.rs` (current: `// port-lint: source rama-http/src/layer/set_header/mod.rs`)
-- **Lint issues:** 1
 
 ### 24. convert.mod
 
-- **Target:** `convert.Mod [STUB] [PROVENANCE-FALLBACK]`
+- **Target:** `convert.Mod [STUB]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10.0
@@ -404,13 +325,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/convert/mod.rs` vs expected `convert/mod.rs`
-- **Proposed provenance header:** `// port-lint: source convert/mod.rs` (current: `// port-lint: source rama-http/src/convert/mod.rs`)
-- **Lint issues:** 1
 
 ### 25. auth.mod
 
-- **Target:** `layer.Auth [STUB] [PROVENANCE-FALLBACK]`
+- **Target:** `layer.Auth [STUB]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10.0
@@ -418,13 +336,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 4)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/layer/auth/mod.rs` vs expected `layer/auth/mod.rs`
-- **Proposed provenance header:** `// port-lint: source layer/auth/mod.rs` (current: `// port-lint: source rama-http/src/layer/auth/mod.rs`)
-- **Lint issues:** 1
 
 ### 26. body.mod
 
-- **Target:** `body.Mod [STUB] [PROVENANCE-FALLBACK]`
+- **Target:** `body.Mod [STUB]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10.0
@@ -432,13 +347,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/body/mod.rs` vs expected `body/mod.rs`
-- **Proposed provenance header:** `// port-lint: source body/mod.rs` (current: `// port-lint: source rama-http/src/body/mod.rs`)
-- **Lint issues:** 1
 
 ### 27. redirect.mod
 
-- **Target:** `redirect.Redirect [STUB] [PROVENANCE-FALLBACK]`
+- **Target:** `redirect.Redirect [STUB]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10.0
@@ -446,13 +358,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 2)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/service/redirect/mod.rs` vs expected `service/redirect/mod.rs`
-- **Proposed provenance header:** `// port-lint: source service/redirect/mod.rs` (current: `// port-lint: source rama-http/src/service/redirect/mod.rs`)
-- **Lint issues:** 1
 
 ### 28. io.mod
 
-- **Target:** `io.Mod [STUB] [PROVENANCE-FALLBACK]`
+- **Target:** `io.Mod [STUB]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10.0
@@ -460,61 +369,6 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 2)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/io/mod.rs` vs expected `io/mod.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:rama-http/src/io/mod.rs` vs expected `io/mod.rs`
-- **Proposed provenance header:** `// port-lint: source io/mod.rs` (current: `// port-lint: source rama-http/src/io/mod.rs`)
-- **Proposed provenance header:** `// port-lint: tests io/mod.rs` (current: `// port-lint: tests rama-http/src/io/mod.rs`)
-- **Lint issues:** 2
-
-### 29. lib
-
-- **Target:** `ramahttp.Lib [STUB] [PROVENANCE-FALLBACK]`
-- **Similarity:** 0.00
-- **Dependents:** 0
-- **Priority Score:** 10.0
-- **Functions:** 0/0 matched (target 157)
-- **Missing functions:** _none_
-- **Types:** 0/0 matched (target 44)
-- **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/lib.rs` vs expected `lib.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/lib.rs` vs expected `lib.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/lib.rs` vs expected `lib.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/lib.rs` vs expected `lib.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/lib.rs` vs expected `lib.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/lib.rs` vs expected `lib.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/lib.rs` vs expected `lib.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/lib.rs` vs expected `lib.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/lib.rs` vs expected `lib.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/lib.rs` vs expected `lib.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/lib.rs` vs expected `lib.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/lib.rs` vs expected `lib.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/lib.rs` vs expected `lib.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `rama-http/src/lib.rs` vs expected `lib.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:rama-http/src/lib.rs` vs expected `lib.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:rama-http/src/lib.rs` vs expected `lib.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:rama-http/src/lib.rs` vs expected `lib.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:rama-http/src/lib.rs` vs expected `lib.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:rama-http/src/lib.rs` vs expected `lib.rs`
-- **Proposed provenance header:** `// port-lint: source lib.rs` (current: `// port-lint: source rama-http/src/lib.rs`)
-- **Proposed provenance header:** `// port-lint: source lib.rs` (current: `// port-lint: source rama-http/src/lib.rs`)
-- **Proposed provenance header:** `// port-lint: source lib.rs` (current: `// port-lint: source rama-http/src/lib.rs`)
-- **Proposed provenance header:** `// port-lint: source lib.rs` (current: `// port-lint: source rama-http/src/lib.rs`)
-- **Proposed provenance header:** `// port-lint: source lib.rs` (current: `// port-lint: source rama-http/src/lib.rs`)
-- **Proposed provenance header:** `// port-lint: source lib.rs` (current: `// port-lint: source rama-http/src/lib.rs`)
-- **Proposed provenance header:** `// port-lint: source lib.rs` (current: `// port-lint: source rama-http/src/lib.rs`)
-- **Proposed provenance header:** `// port-lint: source lib.rs` (current: `// port-lint: source rama-http/src/lib.rs`)
-- **Proposed provenance header:** `// port-lint: source lib.rs` (current: `// port-lint: source rama-http/src/lib.rs`)
-- **Proposed provenance header:** `// port-lint: source lib.rs` (current: `// port-lint: source rama-http/src/lib.rs`)
-- **Proposed provenance header:** `// port-lint: source lib.rs` (current: `// port-lint: source rama-http/src/lib.rs`)
-- **Proposed provenance header:** `// port-lint: source lib.rs` (current: `// port-lint: source rama-http/src/lib.rs`)
-- **Proposed provenance header:** `// port-lint: source lib.rs` (current: `// port-lint: source rama-http/src/lib.rs`)
-- **Proposed provenance header:** `// port-lint: source lib.rs` (current: `// port-lint: source rama-http/src/lib.rs`)
-- **Proposed provenance header:** `// port-lint: tests lib.rs` (current: `// port-lint: tests rama-http/src/lib.rs`)
-- **Proposed provenance header:** `// port-lint: tests lib.rs` (current: `// port-lint: tests rama-http/src/lib.rs`)
-- **Proposed provenance header:** `// port-lint: tests lib.rs` (current: `// port-lint: tests rama-http/src/lib.rs`)
-- **Proposed provenance header:** `// port-lint: tests lib.rs` (current: `// port-lint: tests rama-http/src/lib.rs`)
-- **Proposed provenance header:** `// port-lint: tests lib.rs` (current: `// port-lint: tests rama-http/src/lib.rs`)
-- **Lint issues:** 19
 
 ## Success Criteria
 
@@ -524,4 +378,31 @@ For each file to be considered "complete":
 - All tests ported
 - Documentation ported
 - port-lint header present
+
+## Reexport / Wiring Modules
+
+These files match `reexport_modules` patterns in `.ast_distance_config.json`. They are filtered out of
+normal priority and missing-file ladders because they are wiring
+modules, not direct logic ports. Consult them for call-site routing;
+do not treat them as the next implementation target by default.
+
+### Matched
+
+| Source | Target | Path |
+|--------|--------|------|
+| `rama-http.lib` | `ramahttp.Lib` | `rama-http/src/lib` |
+
+### Missing
+
+| Source | Expected target | Deps | Source path | Expected path |
+|--------|-----------------|------|-------------|---------------|
+| `layer.mod` | `ramahttp.src.layer.Mod` | 0 | `rama-http/src/layer/mod.rs` | `ramahttp/src/layer/Mod.kt` |
+| `client.mod` | `ramahttp.src.service.client.Mod` | 0 | `rama-http/src/service/client/mod.rs` | `ramahttp/src/service/client/Mod.kt` |
+| `fs.mod` | `ramahttp.src.service.fs.Mod` | 0 | `rama-http/src/service/fs/mod.rs` | `ramahttp/src/service/fs/Mod.kt` |
+| `serve_dir.mod` | `ramahttp.src.service.fs.servedir.Mod` | 0 | `rama-http/src/service/fs/serve_dir/mod.rs` | `ramahttp/src/service/fs/servedir/Mod.kt` |
+| `service.mod` | `ramahttp.src.service.Mod` | 0 | `rama-http/src/service/mod.rs` | `ramahttp/src/service/Mod.kt` |
+| `rama-http.service.web.endpoint.extract.body.mod` | `ramahttp.src.service.web.endpoint.extract.body.Mod` | 0 | `rama-http/src/service/web/endpoint/extract/body/mod.rs` | `ramahttp/src/service/web/endpoint/extract/body/Mod.kt` |
+| `extract.mod` | `ramahttp.src.service.web.endpoint.extract.Mod` | 0 | `rama-http/src/service/web/endpoint/extract/mod.rs` | `ramahttp/src/service/web/endpoint/extract/Mod.kt` |
+| `endpoint.mod` | `ramahttp.src.service.web.endpoint.Mod` | 0 | `rama-http/src/service/web/endpoint/mod.rs` | `ramahttp/src/service/web/endpoint/Mod.kt` |
+| `rama-http.service.web.endpoint.response.mod` | `ramahttp.src.service.web.endpoint.response.Mod` | 0 | `rama-http/src/service/web/endpoint/response/mod.rs` | `ramahttp/src/service/web/endpoint/response/Mod.kt` |
 
