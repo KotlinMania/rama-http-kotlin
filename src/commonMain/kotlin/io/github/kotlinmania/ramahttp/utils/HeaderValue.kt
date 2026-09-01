@@ -1,4 +1,4 @@
-// port-lint: source rama-http/src/utils/header_value.rs
+// port-lint: source utils/header_value.rs
 package io.github.kotlinmania.ramahttp.utils
 
 import io.github.kotlinmania.ramahttp.types.HeaderMap

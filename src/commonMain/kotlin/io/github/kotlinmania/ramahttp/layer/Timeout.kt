@@ -1,4 +1,4 @@
-// port-lint: source rama-http/src/layer/timeout.rs
+// port-lint: source layer/timeout.rs
 package io.github.kotlinmania.ramahttp.layer
 
 import io.github.kotlinmania.ramahttp.core.HttpLayer

@@ -1,4 +1,4 @@
-// port-lint: tests rama-http/src/layer/set_status.rs
+// port-lint: tests layer/set_status.rs
 package io.github.kotlinmania.ramahttp.layer
 
 import io.github.kotlinmania.ramahttp.core.HttpService
