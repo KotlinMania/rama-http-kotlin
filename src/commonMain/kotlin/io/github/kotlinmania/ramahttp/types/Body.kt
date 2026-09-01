@@ -1,4 +1,4 @@
-// port-lint: source rama-http/src/lib.rs
+// port-lint: source lib.rs
 package io.github.kotlinmania.ramahttp.types
 
 import kotlinx.coroutines.flow.Flow

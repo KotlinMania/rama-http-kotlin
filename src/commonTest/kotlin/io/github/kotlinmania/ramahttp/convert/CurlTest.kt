@@ -1,4 +1,4 @@
-// port-lint: tests rama-http/src/convert/curl.rs
+// port-lint: tests convert/curl.rs
 package io.github.kotlinmania.ramahttp.convert
 
 import io.github.kotlinmania.ramahttp.types.Body

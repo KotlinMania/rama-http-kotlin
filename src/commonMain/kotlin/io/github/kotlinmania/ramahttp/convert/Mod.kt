@@ -1,4 +1,4 @@
-// port-lint: source rama-http/src/convert/mod.rs
+// port-lint: source convert/mod.rs
 package io.github.kotlinmania.ramahttp.convert
 
 /**
