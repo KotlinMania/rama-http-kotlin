@@ -22,7 +22,8 @@ public class UriParams(
     }
 
     public fun appendGlob(value: String) {
-        glob = if (glob != null) "$glob/$value" else "/$value"
+        val current = glob
+        glob = if (current != null) "$current/$value" else "/$value"
     }
 
     public fun iter(): List<Pair<String, String>> = paramsMap.map { Pair(it.key, it.value) }
