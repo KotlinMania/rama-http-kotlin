@@ -23,3 +23,9 @@ public typealias Layer<S, Target> = io.github.kotlinmania.ramahttp.core.Layer<S,
 public typealias HttpLayer = io.github.kotlinmania.ramahttp.core.HttpLayer
 public typealias Matcher<Req> = io.github.kotlinmania.ramahttp.core.Matcher<Req>
 public typealias RequestMatcher = io.github.kotlinmania.ramahttp.core.RequestMatcher
+
+public val RAMA_ID_HEADER_VALUE: HeaderValue = io.github.kotlinmania.ramahttp.types.RAMA_ID_HEADER_VALUE
+public typealias AddRequiredRequestHeadersLayer = io.github.kotlinmania.ramahttp.layer.AddRequiredRequestHeadersLayer
+public typealias AddRequiredRequestHeaders = io.github.kotlinmania.ramahttp.layer.AddRequiredRequestHeaders
+public typealias AddRequiredResponseHeadersLayer = io.github.kotlinmania.ramahttp.layer.AddRequiredResponseHeadersLayer
+public typealias AddRequiredResponseHeaders = io.github.kotlinmania.ramahttp.layer.AddRequiredResponseHeaders

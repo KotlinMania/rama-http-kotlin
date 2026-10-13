@@ -138,8 +138,12 @@ public class HeaderValue(
         public fun fromBytes(bytes: ByteArray): HeaderValue = HeaderValue(bytes.copyOf())
 
         public fun fromName(name: HeaderName): HeaderValue = fromString(name.asStr())
+
+        public val RAMA_ID_HEADER_VALUE: HeaderValue = fromStatic("rama")
     }
 }
+
+public val RAMA_ID_HEADER_VALUE: HeaderValue = HeaderValue.RAMA_ID_HEADER_VALUE
 
 /**
  * A multi-map of HTTP headers.
