@@ -159,7 +159,7 @@ public class HeaderMap : Iterable<Pair<HeaderName, HeaderValue>> {
 
     public fun get(name: String): HeaderValue? = get(HeaderName.fromString(name))
 
-    public fun getAll(name: HeaderName): List<HeaderValue> = map[name]?.toList() ?: emptyList()
+    public fun getAll(name: HeaderName): List<HeaderValue> = map[name]?.toList().orEmpty()
 
     public fun getAll(name: String): List<HeaderValue> = getAll(HeaderName.fromString(name))
 

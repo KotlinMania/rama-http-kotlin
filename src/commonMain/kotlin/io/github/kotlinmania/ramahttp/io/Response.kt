@@ -19,7 +19,8 @@ public suspend fun writeHttpResponse(
                 Version.HTTP_2 -> "HTTP/2.0"
                 Version.HTTP_3 -> "HTTP/3.0"
             }
-        val reason = response.status.canonicalReason()?.let { " $it" } ?: ""
+        val canonicalReason = response.status.canonicalReason()
+        val reason = if (canonicalReason != null) " $canonicalReason" else ""
         sb
             .append(versionStr)
             .append(" ")
