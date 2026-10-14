@@ -13,8 +13,8 @@ public val StatusCode.code: UShort
 
 public fun StatusCode.asInt(): Int = asU16()
 
-public fun StatusCode.Companion.fromU16(code: UShort): StatusCode =
+public fun HttpStatusCode.Companion.fromU16(code: UShort): StatusCode =
     fromU16(code.toInt()).getOrThrow()
 
-public fun StatusCode.Companion.fromInt(code: Int): StatusCode =
+public fun HttpStatusCode.Companion.fromInt(code: Int): StatusCode =
     fromU16(code).getOrThrow()
