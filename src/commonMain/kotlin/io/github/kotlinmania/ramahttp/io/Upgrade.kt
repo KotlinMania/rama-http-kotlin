@@ -14,11 +14,13 @@ import kotlinx.coroutines.CompletableDeferred
  * An upgraded HTTP connection.
  */
 public class Upgraded(
-    public val io: Any,
+    stream: Any,
     public val readBuf: ByteArray = ByteArray(0),
     private val extensionsStore: Extensions = Extensions(),
 ) : ExtensionsMut {
-    public constructor(io: Any, extensions: Extensions) : this(io, ByteArray(0), extensions)
+    public val io: Any = stream
+
+    public constructor(stream: Any, extensions: Extensions) : this(stream, ByteArray(0), extensions)
 
     override fun extensions(): Extensions = extensionsStore
 
@@ -32,9 +34,9 @@ public class Upgraded(
     override fun toString(): String = "Upgraded"
 
     public companion object {
-        public fun new(io: Any, readBuf: ByteArray = ByteArray(0)): Upgraded {
-            val ext = (io as? ExtensionsRef)?.extensions()?.copy() ?: Extensions()
-            return Upgraded(io, readBuf, ext)
+        public fun new(stream: Any, readBuf: ByteArray = ByteArray(0)): Upgraded {
+            val ext = (stream as? ExtensionsRef)?.extensions()?.copy() ?: Extensions()
+            return Upgraded(stream, readBuf, ext)
         }
     }
 }
@@ -43,10 +45,12 @@ public class Upgraded(
  * The deconstructed parts of an [Upgraded] connection.
  */
 public class Parts<out T>(
-    public val io: T,
+    stream: T,
     public val readBuf: ByteArray,
     public val extensions: Extensions,
-)
+) {
+    public val io: T = stream
+}
 
 /**
  * A future for a possible HTTP upgrade.
