@@ -53,5 +53,5 @@ public typealias Matcher<Req> = RamaMatcher<Req>
  * A matcher that determines whether an HTTP request matches certain criteria.
  */
 public fun interface RequestMatcher : Matcher<io.github.kotlinmania.ramahttp.types.Request> {
-    override fun matches(ext: Extensions?, req: io.github.kotlinmania.ramahttp.types.Request): Boolean
+    override fun matches(ext: Extensions?, input: io.github.kotlinmania.ramahttp.types.Request): Boolean
 }

@@ -18,9 +18,9 @@ public class MethodMatcher private constructor(
 
     public fun contains(other: MethodMatcher): Boolean = (this.bits and other.bits) == other.bits
 
-    override fun matches(ext: Extensions?, req: Request): Boolean {
+    override fun matches(ext: Extensions?, input: Request): Boolean {
         ext?.hashCode()
-        val methodMatcher = fromMethod(req.method) ?: return false
+        val methodMatcher = fromMethod(input.method) ?: return false
         return contains(methodMatcher)
     }
 

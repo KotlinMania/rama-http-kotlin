@@ -32,11 +32,11 @@ public class SubdomainTrieMatcher(
         return trie.isMatchParent(Domain.parse(clean))
     }
 
-    override fun matches(ext: Extensions?, req: Request): Boolean {
+    override fun matches(ext: Extensions?, input: Request): Boolean {
         ext?.hashCode()
         val host =
-            req.uri.host
-                ?: req.headers
+            input.uri.host
+                ?: input.headers
                     .get(HeaderName.HOST)
                     ?.toStrOrNull()
                     ?.substringBefore(':')

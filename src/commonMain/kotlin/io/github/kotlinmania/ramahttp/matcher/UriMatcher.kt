@@ -15,9 +15,9 @@ public class UriMatcher private constructor(
 ) : Matcher<Request> {
     public fun isMatch(uriStr: String): Boolean = predicate.matches(uriStr)
 
-    override fun matches(ext: Extensions?, req: Request): Boolean {
+    override fun matches(ext: Extensions?, input: Request): Boolean {
         ext?.hashCode()
-        val uri = requestUri(req)
+        val uri = requestUri(input)
         return predicate.matches(uri.toString())
     }
 
