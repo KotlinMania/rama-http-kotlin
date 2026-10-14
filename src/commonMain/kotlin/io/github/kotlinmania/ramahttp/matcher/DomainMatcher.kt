@@ -1,25 +1,27 @@
 // port-lint: source matcher/domain.rs
 package io.github.kotlinmania.ramahttp.matcher
 
-import io.github.kotlinmania.ramahttp.core.Extensions
-import io.github.kotlinmania.ramahttp.core.Matcher
+import io.github.kotlinmania.ramacore.Extensions
+import io.github.kotlinmania.ramacore.matcher.Matcher
 import io.github.kotlinmania.ramahttp.types.HeaderName
 import io.github.kotlinmania.ramahttp.types.Request
+import io.github.kotlinmania.ramanet.address.Domain
 
 public class DomainMatcher private constructor(
-    private val target: String,
-    private val isSubdomain: Boolean,
+    private val domain: Domain,
+    private val sub: Boolean,
 ) : Matcher<Request> {
     public fun isMatch(host: String): Boolean {
         val cleanHost = host.trim().lowercase().removePrefix(".")
-        val cleanTarget = target.trim().lowercase().removePrefix(".")
-        if (cleanHost == cleanTarget) {
-            return true
+        if (!Domain.isValidName(cleanHost)) {
+            return false
         }
-        if (isSubdomain) {
-            return cleanHost.endsWith(".$cleanTarget")
+        val parsed = Domain.parse(cleanHost)
+        return if (sub) {
+            domain.isParentOf(parsed)
+        } else {
+            domain == parsed
         }
-        return false
     }
 
     override fun matches(ext: Extensions?, req: Request): Boolean {
@@ -35,18 +37,24 @@ public class DomainMatcher private constructor(
     }
 
     public companion object {
-        public fun exact(domain: String): DomainMatcher = DomainMatcher(domain, isSubdomain = false)
+        public fun exact(domain: Domain): DomainMatcher = DomainMatcher(domain, sub = false)
 
-        public fun sub(domain: String): DomainMatcher = DomainMatcher(domain, isSubdomain = true)
+        public fun exact(domain: String): DomainMatcher =
+            DomainMatcher(Domain.parse(domain.trim().removePrefix(".")), sub = false)
+
+        public fun sub(domain: Domain): DomainMatcher = DomainMatcher(domain, sub = true)
+
+        public fun sub(domain: String): DomainMatcher =
+            DomainMatcher(Domain.parse(domain.trim().removePrefix(".")), sub = true)
 
         public fun auto(domain: String): DomainMatcher {
             val trimmed = domain.trim()
             return if (trimmed.startsWith("*.")) {
-                DomainMatcher(trimmed.substring(2), isSubdomain = true)
+                sub(trimmed.substring(2))
             } else if (trimmed.startsWith(".")) {
-                DomainMatcher(trimmed.substring(1), isSubdomain = true)
+                sub(trimmed.substring(1))
             } else {
-                DomainMatcher(trimmed, isSubdomain = false)
+                exact(trimmed)
             }
         }
     }

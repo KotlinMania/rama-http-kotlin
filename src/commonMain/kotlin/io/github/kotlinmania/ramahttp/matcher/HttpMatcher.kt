@@ -29,7 +29,7 @@ public class HttpMatcher private constructor(
             val matcher: PathMatcher,
         ) : Kind()
 
-        class Domain(
+        class Dom(
             val matcher: DomainMatcher,
         ) : Kind()
 
@@ -89,7 +89,7 @@ public class HttpMatcher private constructor(
                 is Kind.Any -> k.matchers.any { it.matches(ext, req) }
                 is Kind.Method -> k.matcher.matches(ext, req)
                 is Kind.Path -> k.matcher.matches(ext, req)
-                is Kind.Domain -> k.matcher.matches(ext, req)
+                is Kind.Dom -> k.matcher.matches(ext, req)
                 is Kind.Ver -> k.matcher.matches(ext, req)
                 is Kind.Uri -> k.matcher.matches(ext, req)
                 is Kind.Header -> k.matcher.matches(ext, req)
@@ -134,7 +134,7 @@ public class HttpMatcher private constructor(
             HttpMatcher(Kind.Path(PathMatcher.newPrefix(path)))
 
         public fun domain(domain: String): HttpMatcher =
-            HttpMatcher(Kind.Domain(DomainMatcher.auto(domain)))
+            HttpMatcher(Kind.Dom(DomainMatcher.auto(domain)))
 
         public fun version(version: Version): HttpMatcher {
             val vm = VersionMatcher.fromVersion(version) ?: VersionMatcher.HTTP_11

@@ -7,6 +7,9 @@ import io.github.kotlinmania.ramahttp.types.HeaderName
 import io.github.kotlinmania.ramahttp.types.HeaderValue
 import io.github.kotlinmania.ramahttp.types.Request
 import io.github.kotlinmania.ramahttp.types.Response
+import io.github.kotlinmania.uuid.Uuid
+import io.github.kotlinmania.uuid.newV4
+import kotlin.random.Random
 
 public class RequestId(
     public val headerValue: HeaderValue,
@@ -14,12 +17,27 @@ public class RequestId(
     override fun toString(): String = headerValue.toStr()
 
     public companion object {
+        public fun new(headerValue: HeaderValue): RequestId = RequestId(headerValue)
+
         public fun fromString(str: String): RequestId = RequestId(HeaderValue.fromString(str))
     }
 }
 
 public fun interface MakeRequestId {
     public fun makeRequestId(request: Request): RequestId?
+}
+
+public class MakeRequestUuid : MakeRequestId {
+    override fun makeRequestId(request: Request): RequestId? =
+        RequestId.fromString(Uuid.newV4().toString())
+}
+
+public class MakeRequestNanoid : MakeRequestId {
+    override fun makeRequestId(request: Request): RequestId? {
+        val alphabet = "_-0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        val chars = CharArray(21) { alphabet[Random.nextInt(alphabet.length)] }
+        return RequestId.fromString(chars.concatToString())
+    }
 }
 
 public class SetRequestIdLayer(
@@ -56,7 +74,7 @@ internal class PropagateRequestId(
 ) : HttpService {
     override suspend fun serve(req: Request): Response {
         val res = inner.serve(req)
-        val reqId = req.headers.get(headerName) ?: req.extensions.get(RequestId::class)?.headerValue
+        val reqId = req.headers.get(headerName) ?: req.extensions.get<RequestId>()?.headerValue
         if (reqId != null && !res.headers.containsKey(headerName)) {
             res.headers.insert(headerName, reqId)
         }
