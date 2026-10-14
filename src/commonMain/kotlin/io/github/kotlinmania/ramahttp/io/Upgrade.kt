@@ -16,17 +16,17 @@ import kotlinx.coroutines.CompletableDeferred
 public class Upgraded(
     public val io: Any,
     public val readBuf: ByteArray = ByteArray(0),
-    public val extensions: Extensions = Extensions(),
+    private val extensionsStore: Extensions = Extensions(),
 ) : ExtensionsMut {
     public constructor(io: Any, extensions: Extensions) : this(io, ByteArray(0), extensions)
 
-    override fun extensions(): Extensions = extensions
+    override fun extensions(): Extensions = extensionsStore
 
-    override fun extensionsMut(): Extensions = extensions
+    override fun extensionsMut(): Extensions = extensionsStore
 
     public inline fun <reified T : Any> downcast(): Result<Parts<T>> {
         val typed = io as? T ?: return Result.failure(IllegalStateException("Upgraded downcast failed"))
-        return Result.success(Parts(typed, readBuf, extensions))
+        return Result.success(Parts(typed, readBuf, extensions()))
     }
 
     override fun toString(): String = "Upgraded"
