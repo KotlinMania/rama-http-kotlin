@@ -20,7 +20,7 @@ public class Response(
     public fun intoBody(): Body = body
 
     public fun intoParts(): Pair<ResponseParts, Body> {
-        val parts = ResponseParts(status, version, headers.clone(), extensions.clone())
+        val parts = ResponseParts(status, version, headers.clone(), extensions.copy())
         return Pair(parts, body)
     }
 

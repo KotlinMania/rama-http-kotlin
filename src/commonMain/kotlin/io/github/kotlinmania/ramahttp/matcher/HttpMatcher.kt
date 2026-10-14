@@ -29,7 +29,7 @@ public class HttpMatcher private constructor(
             val matcher: PathMatcher,
         ) : Kind()
 
-        class Domain(
+        class Dom(
             val matcher: DomainMatcher,
         ) : Kind()
 
@@ -82,19 +82,19 @@ public class HttpMatcher private constructor(
 
     public fun andHeader(header: HeaderMatcher): HttpMatcher = and(header(header))
 
-    override fun matches(ext: Extensions?, req: Request): Boolean {
+    override fun matches(ext: Extensions?, input: Request): Boolean {
         val matched =
             when (val k = kind) {
-                is Kind.All -> k.matchers.all { it.matches(ext, req) }
-                is Kind.Any -> k.matchers.any { it.matches(ext, req) }
-                is Kind.Method -> k.matcher.matches(ext, req)
-                is Kind.Path -> k.matcher.matches(ext, req)
-                is Kind.Domain -> k.matcher.matches(ext, req)
-                is Kind.Ver -> k.matcher.matches(ext, req)
-                is Kind.Uri -> k.matcher.matches(ext, req)
-                is Kind.Header -> k.matcher.matches(ext, req)
-                is Kind.SubdomainTrie -> k.matcher.matches(ext, req)
-                is Kind.Custom -> k.matcher.matches(ext, req)
+                is Kind.All -> k.matchers.all { it.matches(ext, input) }
+                is Kind.Any -> k.matchers.any { it.matches(ext, input) }
+                is Kind.Method -> k.matcher.matches(ext, input)
+                is Kind.Path -> k.matcher.matches(ext, input)
+                is Kind.Dom -> k.matcher.matches(ext, input)
+                is Kind.Ver -> k.matcher.matches(ext, input)
+                is Kind.Uri -> k.matcher.matches(ext, input)
+                is Kind.Header -> k.matcher.matches(ext, input)
+                is Kind.SubdomainTrie -> k.matcher.matches(ext, input)
+                is Kind.Custom -> k.matcher.matches(ext, input)
             }
         return if (negated) !matched else matched
     }
@@ -134,7 +134,7 @@ public class HttpMatcher private constructor(
             HttpMatcher(Kind.Path(PathMatcher.newPrefix(path)))
 
         public fun domain(domain: String): HttpMatcher =
-            HttpMatcher(Kind.Domain(DomainMatcher.auto(domain)))
+            HttpMatcher(Kind.Dom(DomainMatcher.auto(domain)))
 
         public fun version(version: Version): HttpMatcher {
             val vm = VersionMatcher.fromVersion(version) ?: VersionMatcher.HTTP_11

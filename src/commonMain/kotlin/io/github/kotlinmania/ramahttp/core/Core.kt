@@ -1,49 +1,13 @@
 // port-lint: source lib.rs
 package io.github.kotlinmania.ramahttp.core
 
-import kotlin.reflect.KClass
+import io.github.kotlinmania.ramacore.Extensions as RamaExtensions
+import io.github.kotlinmania.ramacore.layer.Layer as RamaLayer
+import io.github.kotlinmania.ramacore.matcher.Matcher as RamaMatcher
 
-/**
- * A type-safe heterogeneous map for request and connection metadata.
- */
-public class Extensions {
-    private val map: MutableMap<KClass<*>, Any> = mutableMapOf()
+public typealias Extensions = RamaExtensions
 
-    public fun <T : Any> insert(kClass: KClass<T>, value: T): T? {
-        @Suppress("UNCHECKED_CAST")
-        return map.put(kClass, value) as? T
-    }
-
-    public inline fun <reified T : Any> insert(value: T): T? = insert(T::class, value)
-
-    public fun <T : Any> get(kClass: KClass<T>): T? {
-        @Suppress("UNCHECKED_CAST")
-        return map[kClass] as? T
-    }
-
-    public inline fun <reified T : Any> get(): T? = get(T::class)
-
-    public fun <T : Any> remove(kClass: KClass<T>): T? {
-        @Suppress("UNCHECKED_CAST")
-        return map.remove(kClass) as? T
-    }
-
-    public inline fun <reified T : Any> remove(): T? = remove(T::class)
-
-    public fun <T : Any> contains(kClass: KClass<T>): Boolean = map.containsKey(kClass)
-
-    public inline fun <reified T : Any> contains(): Boolean = contains(T::class)
-
-    public fun clear() {
-        map.clear()
-    }
-
-    public fun clone(): Extensions {
-        val ext = Extensions()
-        ext.map.putAll(this.map)
-        return ext
-    }
-}
+public fun Extensions.clone(): Extensions = copy()
 
 /**
  * Request processing context holding extensions.
@@ -51,7 +15,7 @@ public class Extensions {
 public class Context(
     public val extensions: Extensions = Extensions(),
 ) {
-    public fun clone(): Context = Context(extensions.clone())
+    public fun clone(): Context = Context(extensions.copy())
 }
 
 /**
@@ -69,6 +33,11 @@ public fun interface HttpService : Service<io.github.kotlinmania.ramahttp.types.
 }
 
 /**
+ * A layer that wraps a [Service] with middleware functionality.
+ */
+public typealias Layer<S, Target> = RamaLayer<S, Target>
+
+/**
  * A layer that wraps an [HttpService] with middleware functionality.
  */
 public fun interface HttpLayer : Layer<HttpService, HttpService> {
@@ -76,22 +45,13 @@ public fun interface HttpLayer : Layer<HttpService, HttpService> {
 }
 
 /**
- * A layer that wraps a [Service] with middleware functionality.
- */
-public fun interface Layer<in S, out Target> {
-    public fun layer(inner: S): Target
-}
-
-/**
  * A matcher that determines whether a request matches certain criteria.
  */
-public fun interface Matcher<in Req> {
-    public fun matches(ext: Extensions?, req: Req): Boolean
-}
+public typealias Matcher<Req> = RamaMatcher<Req>
 
 /**
  * A matcher that determines whether an HTTP request matches certain criteria.
  */
 public fun interface RequestMatcher : Matcher<io.github.kotlinmania.ramahttp.types.Request> {
-    override fun matches(ext: Extensions?, req: io.github.kotlinmania.ramahttp.types.Request): Boolean
+    override fun matches(ext: Extensions?, input: io.github.kotlinmania.ramahttp.types.Request): Boolean
 }

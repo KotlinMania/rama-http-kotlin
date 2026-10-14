@@ -22,7 +22,7 @@ public class Request(
     public fun intoBody(): Body = body
 
     public fun intoParts(): Pair<RequestParts, Body> {
-        val parts = RequestParts(method, uri, version, headers.clone(), extensions.clone())
+        val parts = RequestParts(method, uri, version, headers.clone(), extensions.copy())
         return Pair(parts, body)
     }
 

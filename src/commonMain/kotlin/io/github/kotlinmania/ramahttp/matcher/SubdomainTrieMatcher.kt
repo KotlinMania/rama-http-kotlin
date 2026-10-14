@@ -1,56 +1,42 @@
 // port-lint: source matcher/subdomain_trie.rs
 package io.github.kotlinmania.ramahttp.matcher
 
-import io.github.kotlinmania.ramahttp.core.Extensions
-import io.github.kotlinmania.ramahttp.core.Matcher
+import io.github.kotlinmania.ramacore.Extensions
+import io.github.kotlinmania.ramacore.matcher.Matcher
 import io.github.kotlinmania.ramahttp.types.HeaderName
 import io.github.kotlinmania.ramahttp.types.Request
+import io.github.kotlinmania.ramanet.address.Domain
+import io.github.kotlinmania.ramanet.address.DomainTrie
 
 public class SubdomainTrieMatcher(
     domains: List<String>,
 ) : Matcher<Request> {
-    private class Node {
-        var isTerminal: Boolean = false
-        val children: MutableMap<String, Node> = mutableMapOf()
-    }
-
-    private val root = Node()
+    private val trie: DomainTrie<Unit> = DomainTrie.new()
 
     init {
         for (domain in domains) {
-            insert(domain)
+            val clean = domain.trim().lowercase().removePrefix(".")
+            if (Domain.isValidName(clean)) {
+                trie.insert(Domain.parse(clean), Unit)
+            }
         }
     }
 
-    private fun insert(domain: String) {
-        val clean = domain.trim().lowercase().removePrefix(".")
-        val labels = clean.split('.').reversed()
-        var curr = root
-        for (label in labels) {
-            curr = curr.children.getOrPut(label) { Node() }
-        }
-        curr.isTerminal = true
-    }
+    public fun isMatch(domain: Domain): Boolean = trie.isMatchParent(domain)
 
     public fun isMatch(domain: String): Boolean {
         val clean = domain.trim().lowercase().removePrefix(".")
-        val labels = clean.split('.').reversed()
-        var curr = root
-        for (label in labels) {
-            val next = curr.children[label] ?: return false
-            if (next.isTerminal) {
-                return true
-            }
-            curr = next
+        if (!Domain.isValidName(clean)) {
+            return false
         }
-        return curr.isTerminal
+        return trie.isMatchParent(Domain.parse(clean))
     }
 
-    override fun matches(ext: Extensions?, req: Request): Boolean {
+    override fun matches(ext: Extensions?, input: Request): Boolean {
         ext?.hashCode()
         val host =
-            req.uri.host
-                ?: req.headers
+            input.uri.host
+                ?: input.headers
                     .get(HeaderName.HOST)
                     ?.toStrOrNull()
                     ?.substringBefore(':')
@@ -59,6 +45,8 @@ public class SubdomainTrieMatcher(
     }
 
     public companion object {
+        public fun new(domains: List<String>): SubdomainTrieMatcher = SubdomainTrieMatcher(domains)
+
         public fun of(vararg domains: String): SubdomainTrieMatcher =
             SubdomainTrieMatcher(domains.toList())
     }

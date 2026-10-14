@@ -10,8 +10,8 @@ struct RamaHttpExportTests {
 
     @Test("RamaHttp exported types instantiate cleanly")
     func exportedTypesInstantiate() {
-        let statusOk = StatusCode.Companion.shared.OK
-        #expect(statusOk.isSuccess() == true)
+        let hostHeader = HeaderName.Companion.shared.HOST
+        #expect(hostHeader.asStr() == "host")
 
         let methodGet = Method.Companion.shared.GET
         #expect(methodGet.asStr() == "GET")

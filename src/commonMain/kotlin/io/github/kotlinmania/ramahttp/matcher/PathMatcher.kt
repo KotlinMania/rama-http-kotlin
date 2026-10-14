@@ -130,7 +130,7 @@ public class PathMatcher private constructor(
         }
     }
 
-    override fun matches(ext: Extensions?, req: Request): Boolean = matchesPath(ext, req.uri.path)
+    override fun matches(ext: Extensions?, input: Request): Boolean = matchesPath(ext, input.uri.path)
 
     public companion object {
         public fun new(path: String): PathMatcher {
