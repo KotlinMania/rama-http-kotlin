@@ -1,8 +1,9 @@
 // port-lint: source lib.rs
 package io.github.kotlinmania.ramahttp.types
 
-import io.github.kotlinmania.ramahttp.core.Extensions
+import io.github.kotlinmania.http.StatusCode
 
+import io.github.kotlinmania.ramacore.Extensions
 public class ResponseParts(
     public var status: StatusCode = StatusCode.OK,
     public var version: Version = Version.HTTP_11,

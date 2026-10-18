@@ -7,8 +7,7 @@ import io.github.kotlinmania.ramahttp.matcher.HttpMatcher
 import io.github.kotlinmania.ramahttp.service.web.endpoint.response.intoResponse
 import io.github.kotlinmania.ramahttp.types.Request
 import io.github.kotlinmania.ramahttp.types.Response
-import io.github.kotlinmania.ramahttp.types.StatusCode
-
+import io.github.kotlinmania.http.StatusCode
 public class Router : HttpService {
     private val routes: MutableList<Pair<HttpMatcher, HttpService>> = mutableListOf()
     private var notFoundHandler: HttpService =

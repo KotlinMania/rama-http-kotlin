@@ -5,8 +5,7 @@ import io.github.kotlinmania.ramahttp.core.HttpLayer
 import io.github.kotlinmania.ramahttp.core.HttpService
 import io.github.kotlinmania.ramahttp.types.Request
 import io.github.kotlinmania.ramahttp.types.Response
-import io.github.kotlinmania.ramahttp.types.StatusCode
-
+import io.github.kotlinmania.http.StatusCode
 public class SetStatusLayer(
     public val status: StatusCode,
 ) : HttpLayer {

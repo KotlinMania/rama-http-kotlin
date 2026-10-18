@@ -8,8 +8,7 @@ import io.github.kotlinmania.ramahttp.types.HeaderName
 import io.github.kotlinmania.ramahttp.types.HeaderValue
 import io.github.kotlinmania.ramahttp.types.Request
 import io.github.kotlinmania.ramahttp.types.Response
-import io.github.kotlinmania.ramahttp.types.StatusCode
-
+import io.github.kotlinmania.http.StatusCode
 public fun interface TokenValidator {
     public fun validate(token: String): Boolean
 }

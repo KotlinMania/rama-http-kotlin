@@ -1,8 +1,8 @@
 // port-lint: source matcher/uri.rs
 package io.github.kotlinmania.ramahttp.matcher
 
-import io.github.kotlinmania.ramahttp.core.Extensions
-import io.github.kotlinmania.ramahttp.core.Matcher
+import io.github.kotlinmania.ramacore.Extensions
+import io.github.kotlinmania.ramacore.matcher.Matcher
 import io.github.kotlinmania.ramahttp.types.Request
 import io.github.kotlinmania.ramahttp.utils.requestUri
 

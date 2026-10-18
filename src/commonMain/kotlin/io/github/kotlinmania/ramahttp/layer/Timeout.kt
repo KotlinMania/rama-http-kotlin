@@ -6,7 +6,7 @@ import io.github.kotlinmania.ramahttp.core.HttpService
 import io.github.kotlinmania.ramahttp.service.web.endpoint.response.intoResponse
 import io.github.kotlinmania.ramahttp.types.Request
 import io.github.kotlinmania.ramahttp.types.Response
-import io.github.kotlinmania.ramahttp.types.StatusCode
+import io.github.kotlinmania.http.StatusCode
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.withTimeout
 

@@ -5,8 +5,7 @@ import io.github.kotlinmania.ramahttp.types.Body
 import io.github.kotlinmania.ramahttp.types.HeaderName
 import io.github.kotlinmania.ramahttp.types.HeaderValue
 import io.github.kotlinmania.ramahttp.types.Response
-import io.github.kotlinmania.ramahttp.types.StatusCode
-
+import io.github.kotlinmania.http.StatusCode
 /**
  * Trait/Interface for types that can be converted into an HTTP [Response].
  */

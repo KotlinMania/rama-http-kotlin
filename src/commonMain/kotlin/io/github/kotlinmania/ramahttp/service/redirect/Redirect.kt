@@ -7,8 +7,7 @@ import io.github.kotlinmania.ramahttp.types.HeaderName
 import io.github.kotlinmania.ramahttp.types.HeaderValue
 import io.github.kotlinmania.ramahttp.types.Request
 import io.github.kotlinmania.ramahttp.types.Response
-import io.github.kotlinmania.ramahttp.types.StatusCode
-
+import io.github.kotlinmania.http.StatusCode
 /**
  * Service that redirects all HTTP requests to HTTPS.
  */

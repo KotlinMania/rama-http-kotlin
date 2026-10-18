@@ -6,8 +6,7 @@ import io.github.kotlinmania.ramahttp.types.HeaderName
 import io.github.kotlinmania.ramahttp.types.HeaderValue
 import io.github.kotlinmania.ramahttp.types.HttpError
 import io.github.kotlinmania.ramahttp.types.Response
-import io.github.kotlinmania.ramahttp.types.StatusCode
-
+import io.github.kotlinmania.http.StatusCode
 /**
  * A minimal in-memory ZIP archive that acts as a decompression or resource exhaustion trap.
  */
