@@ -1,14 +1,8 @@
-// port-lint: source lib.rs
 package io.github.kotlinmania.ramahttp.core
 
 import io.github.kotlinmania.ramacore.Extensions
 import io.github.kotlinmania.ramacore.layer.Layer
 import io.github.kotlinmania.ramacore.matcher.Matcher
-import io.github.kotlinmania.ramacore.Extensions as RamaExtensions
-import io.github.kotlinmania.ramacore.layer.Layer as RamaLayer
-import io.github.kotlinmania.ramacore.matcher.Matcher as RamaMatcher
-
-public fun Extensions.clone(): Extensions = copy()
 
 /**
  * Request processing context holding extensions.
@@ -34,19 +28,11 @@ public fun interface HttpService : Service<io.github.kotlinmania.ramahttp.types.
 }
 
 /**
- * A layer that wraps a [Service] with middleware functionality.
- */
-
-/**
  * A layer that wraps an [HttpService] with middleware functionality.
  */
 public fun interface HttpLayer : Layer<HttpService, HttpService> {
     override fun layer(inner: HttpService): HttpService
 }
-
-/**
- * A matcher that determines whether a request matches certain criteria.
- */
 
 /**
  * A matcher that determines whether an HTTP request matches certain criteria.
