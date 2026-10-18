@@ -1,11 +1,12 @@
 // port-lint: source service/web/endpoint/response/into_response_parts.rs
 package io.github.kotlinmania.ramahttp.service.web.endpoint.response
 
+import io.github.kotlinmania.http.StatusCode
 import io.github.kotlinmania.ramahttp.types.Body
 import io.github.kotlinmania.ramahttp.types.HeaderName
 import io.github.kotlinmania.ramahttp.types.HeaderValue
 import io.github.kotlinmania.ramahttp.types.Response
-import io.github.kotlinmania.http.StatusCode
+
 /**
  * Trait/Interface for types that can be converted into an HTTP [Response].
  */

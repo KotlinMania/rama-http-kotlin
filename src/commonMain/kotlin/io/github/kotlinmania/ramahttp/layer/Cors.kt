@@ -1,6 +1,7 @@
 // port-lint: source layer/cors/mod.rs
 package io.github.kotlinmania.ramahttp.layer
 
+import io.github.kotlinmania.http.StatusCode
 import io.github.kotlinmania.ramahttp.core.HttpLayer
 import io.github.kotlinmania.ramahttp.core.HttpService
 import io.github.kotlinmania.ramahttp.types.Body
@@ -9,7 +10,7 @@ import io.github.kotlinmania.ramahttp.types.HeaderValue
 import io.github.kotlinmania.ramahttp.types.Method
 import io.github.kotlinmania.ramahttp.types.Request
 import io.github.kotlinmania.ramahttp.types.Response
-import io.github.kotlinmania.http.StatusCode
+
 public class CorsLayer : HttpLayer {
     private var allowOrigin: HeaderValue? = null
     private var allowMethods: List<Method>? = null

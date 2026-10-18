@@ -1,6 +1,7 @@
 // port-lint: tests service/web/mod.rs
 package io.github.kotlinmania.ramahttp.service
 
+import io.github.kotlinmania.http.StatusCode
 import io.github.kotlinmania.ramahttp.core.HttpService
 import io.github.kotlinmania.ramahttp.service.redirect.RedirectHttpToHttps
 import io.github.kotlinmania.ramahttp.service.redirect.RedirectStatic
@@ -12,7 +13,6 @@ import io.github.kotlinmania.ramahttp.types.Body
 import io.github.kotlinmania.ramahttp.types.HeaderName
 import io.github.kotlinmania.ramahttp.types.Method
 import io.github.kotlinmania.ramahttp.types.Request
-import io.github.kotlinmania.http.StatusCode
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals

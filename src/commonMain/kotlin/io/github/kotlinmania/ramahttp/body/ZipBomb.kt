@@ -1,12 +1,13 @@
 // port-lint: source body/zip_bomb.rs
 package io.github.kotlinmania.ramahttp.body
 
+import io.github.kotlinmania.http.StatusCode
 import io.github.kotlinmania.ramahttp.types.Body
 import io.github.kotlinmania.ramahttp.types.HeaderName
 import io.github.kotlinmania.ramahttp.types.HeaderValue
 import io.github.kotlinmania.ramahttp.types.HttpError
 import io.github.kotlinmania.ramahttp.types.Response
-import io.github.kotlinmania.http.StatusCode
+
 /**
  * A minimal in-memory ZIP archive that acts as a decompression or resource exhaustion trap.
  */

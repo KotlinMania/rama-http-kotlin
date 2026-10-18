@@ -1,9 +1,9 @@
 // port-lint: tests body/zip_bomb.rs
 package io.github.kotlinmania.ramahttp.body
 
+import io.github.kotlinmania.http.StatusCode
 import io.github.kotlinmania.ramahttp.types.HeaderName
 import io.github.kotlinmania.ramahttp.types.HeaderValue
-import io.github.kotlinmania.http.StatusCode
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue

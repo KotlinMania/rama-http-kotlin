@@ -1,6 +1,7 @@
 // port-lint: source layer/auth/mod.rs
 package io.github.kotlinmania.ramahttp.layer
 
+import io.github.kotlinmania.http.StatusCode
 import io.github.kotlinmania.ramahttp.core.HttpLayer
 import io.github.kotlinmania.ramahttp.core.HttpService
 import io.github.kotlinmania.ramahttp.service.web.endpoint.response.intoResponse
@@ -8,7 +9,7 @@ import io.github.kotlinmania.ramahttp.types.HeaderName
 import io.github.kotlinmania.ramahttp.types.HeaderValue
 import io.github.kotlinmania.ramahttp.types.Request
 import io.github.kotlinmania.ramahttp.types.Response
-import io.github.kotlinmania.http.StatusCode
+
 public fun interface TokenValidator {
     public fun validate(token: String): Boolean
 }

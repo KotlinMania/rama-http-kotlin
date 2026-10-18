@@ -1,11 +1,12 @@
 // port-lint: source layer/set_status.rs
 package io.github.kotlinmania.ramahttp.layer
 
+import io.github.kotlinmania.http.StatusCode
 import io.github.kotlinmania.ramahttp.core.HttpLayer
 import io.github.kotlinmania.ramahttp.core.HttpService
 import io.github.kotlinmania.ramahttp.types.Request
 import io.github.kotlinmania.ramahttp.types.Response
-import io.github.kotlinmania.http.StatusCode
+
 public class SetStatusLayer(
     public val status: StatusCode,
 ) : HttpLayer {

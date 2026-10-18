@@ -2,7 +2,6 @@
 package io.github.kotlinmania.ramahttp.types
 
 import io.github.kotlinmania.http.StatusCode
-
 import io.github.kotlinmania.http.StatusCode as HttpStatusCode
 
 /**
