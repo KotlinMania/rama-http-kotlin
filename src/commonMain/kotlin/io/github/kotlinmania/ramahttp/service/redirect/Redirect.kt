@@ -1,13 +1,13 @@
 // port-lint: source service/redirect/mod.rs
 package io.github.kotlinmania.ramahttp.service.redirect
 
+import io.github.kotlinmania.http.StatusCode
 import io.github.kotlinmania.ramahttp.core.Service
 import io.github.kotlinmania.ramahttp.types.Body
 import io.github.kotlinmania.ramahttp.types.HeaderName
 import io.github.kotlinmania.ramahttp.types.HeaderValue
 import io.github.kotlinmania.ramahttp.types.Request
 import io.github.kotlinmania.ramahttp.types.Response
-import io.github.kotlinmania.ramahttp.types.StatusCode
 
 /**
  * Service that redirects all HTTP requests to HTTPS.

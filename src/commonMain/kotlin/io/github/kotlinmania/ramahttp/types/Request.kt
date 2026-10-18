@@ -1,7 +1,7 @@
 // port-lint: source lib.rs
 package io.github.kotlinmania.ramahttp.types
 
-import io.github.kotlinmania.ramahttp.core.Extensions
+import io.github.kotlinmania.ramacore.Extensions
 
 public class RequestParts(
     public var method: Method = Method.GET,

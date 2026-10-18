@@ -1,6 +1,7 @@
 // port-lint: tests lib.rs
 package io.github.kotlinmania.ramahttp.types
 
+import io.github.kotlinmania.http.StatusCode
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse

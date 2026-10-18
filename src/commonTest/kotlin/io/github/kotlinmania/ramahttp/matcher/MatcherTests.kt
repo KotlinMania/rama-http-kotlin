@@ -1,7 +1,7 @@
 // port-lint: tests matcher/mod.rs
 package io.github.kotlinmania.ramahttp.matcher
 
-import io.github.kotlinmania.ramahttp.core.Extensions
+import io.github.kotlinmania.ramacore.Extensions
 import io.github.kotlinmania.ramahttp.types.Body
 import io.github.kotlinmania.ramahttp.types.HeaderName
 import io.github.kotlinmania.ramahttp.types.HeaderValue

@@ -1,6 +1,7 @@
 // port-lint: tests layer/required_header/request.rs
 package io.github.kotlinmania.ramahttp.layer
 
+import io.github.kotlinmania.http.StatusCode
 import io.github.kotlinmania.ramahttp.core.HttpService
 import io.github.kotlinmania.ramahttp.types.Body
 import io.github.kotlinmania.ramahttp.types.HeaderName
@@ -8,7 +9,6 @@ import io.github.kotlinmania.ramahttp.types.HeaderValue
 import io.github.kotlinmania.ramahttp.types.RAMA_ID_HEADER_VALUE
 import io.github.kotlinmania.ramahttp.types.Request
 import io.github.kotlinmania.ramahttp.types.Response
-import io.github.kotlinmania.ramahttp.types.StatusCode
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals

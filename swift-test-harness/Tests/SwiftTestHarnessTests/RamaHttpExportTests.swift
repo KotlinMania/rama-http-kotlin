@@ -10,13 +10,13 @@ struct RamaHttpExportTests {
 
     @Test("RamaHttp exported types instantiate cleanly")
     func exportedTypesInstantiate() {
-        let hostHeader = HeaderName.Companion.shared.HOST
+        let hostHeader = ExportedKotlinPackages.io.github.kotlinmania.ramahttp.types.HeaderName.Companion.shared.HOST
         #expect(hostHeader.asStr() == "host")
 
-        let methodGet = Method.Companion.shared.GET
+        let methodGet = ExportedKotlinPackages.io.github.kotlinmania.ramahttp.types.Method.Companion.shared.GET
         #expect(methodGet.asStr() == "GET")
 
-        let version11 = Version.HTTP_11
+        let version11 = ExportedKotlinPackages.io.github.kotlinmania.ramahttp.types.Version.HTTP_11
         #expect(version11.description == "HTTP_11")
     }
 }
